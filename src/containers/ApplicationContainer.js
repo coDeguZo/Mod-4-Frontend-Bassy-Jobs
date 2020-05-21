@@ -7,9 +7,10 @@ export default class ApplicationContainer extends React.Component {
   // }
 
   render(){
+    // console.log("applications: ", this.props)
     return (
-      <div className="App">
-        <Application />
+      <div className="application-container">
+        {this.props.applications.map(a => <Application a={a} key={a.id}/>)}
       </div>
     );
   }
