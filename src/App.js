@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import Nav from './components/Nav';
+import Home from './components/Home'
+import About from './components/About';
+// import Login from './components/Login';
+// import User from './components/User';
+// import Company from './components/Company';
+import JobContainer from './containers/JobContainer';
+import ApplicationContainer from './containers/ApplicationContainer'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      
+    }
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Nav />
+        <Home />
+        <About />
+        {/* <Login /> */}
+        {/* <User />
+        <Company /> */}
+        <JobContainer />
+        <ApplicationContainer />
+      </div>
+    );
+  }
 }
 
-export default App;
