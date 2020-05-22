@@ -1,7 +1,7 @@
 import React from "react"
 
 const ProfileApplications = (props) => {
-    console.log(props.apps)
+    // console.log(props.apps)
     // debugger
     return(
         <div>

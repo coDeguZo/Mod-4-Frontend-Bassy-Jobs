@@ -11,16 +11,14 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidMount(){
+        // console.log(this.props.)
         fetch(`http://localhost:3000/apps`)
         .then(resp => resp.json())
-        .then(d => d.filter(data => {
-            if (data.id === this.props.user.id) {
-                return this.setState({ applications: data })
-            }
-        }))
+        .then(d => d.filter(data => data.user.id === this.props.number ? this.setState({applications: data}) : null))  
     }
 
     render(){
+        // console.log(this.props.user.id)
         return(
             <div>
                 Profile Container
