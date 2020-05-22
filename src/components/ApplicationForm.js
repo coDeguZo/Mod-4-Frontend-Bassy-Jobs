@@ -11,13 +11,12 @@ import {
   } from 'semantic-ui-react'
 
 const ApplicationForm = (props) => {
-    // console.log(props.a)
     return (
         <div> 
-            Form
-        <Form>
-        <Form.Group widths='equal'>
-          <Form.Field
+            Application Form
+         <Form>
+         <Form.Group widths='equal'>
+           <Form.Field
             control={Input}
             label='Full Name'
             placeholder='Full Name'

@@ -7,7 +7,6 @@ import ProfileContainer from './containers/ProfileContainer'
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
-import ApplicationFormContainer from './containers/ApplicationFormContainer'
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 
@@ -27,7 +26,7 @@ export default class App extends React.Component {
     .then(resp => resp.json())
     .then(data => this.setState({ jobListings: data }))
 
-    fetch("http://localhost:3000/users/5")
+    fetch("http://localhost:3000/users/9")
     .then(resp => resp.json())
     .then(data => {
       this.setState({ user: data })
@@ -58,10 +57,8 @@ export default class App extends React.Component {
         {/* <Login /> */}
         {/* <User />
         <Company /> */}
-        <Route exact path="/jobs" render={() => <JobContainer 
+        <Route path="/jobs" render={() => <JobContainer 
           jobListings={this.state.jobListings}/>}/>
-        <Route exath path="/jobs/application-form" render={() => <ApplicationFormContainer
-        />}/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
       </div>
