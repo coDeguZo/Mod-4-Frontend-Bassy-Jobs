@@ -1,5 +1,6 @@
 import React from "react"
 import { Header } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 class Nav extends React.Component {
 
@@ -12,17 +13,18 @@ class Nav extends React.Component {
                 <br/>
                 <div className="content">Bassy Jobs</div>
             </h2>
-            <div className="item">
-                Home
+            <div className="item" >
+                <Link to="/">Home</Link>
             </div>
             <div className="item">
-                About
+                <Link to="/about">About</Link>
             </div>
             <div className="item">
-                Jobs
+                <Link to="/jobs">Jobs</Link>
             </div>
             <div className="item">
-                Login/Profile
+            <Link to="/profile">Profile</Link>
+                {/* Login/Profile */}
             </div>
             </div>
         </div>

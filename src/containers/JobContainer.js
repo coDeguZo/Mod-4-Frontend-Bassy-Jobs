@@ -22,10 +22,6 @@ export default class JobContainer extends React.Component {
     this.setState({ details: !this.state.details })
   }
 
-  // handleButton = (event) => {
-  //   this.setState({ details: !this.state.details })
-  // }
-
   render(){
     console.log("job container: ", this.props)
     return (
@@ -42,11 +38,15 @@ export default class JobContainer extends React.Component {
            </div>
           } />
           <div>
-            <Route exact path={`/jobs/${this.state.selectedJob.id}/application-form`} render={() => <ApplicationForm
-            selectedJob={this.state.selectedJob}/>}/>
+            <Route exact path={"/jobs/:id/application-form"} render={(props) => {    
+              let id = parseInt(props.match.params.id)
+              let job = this.props.jobListings.find(j => j.id === id)
+              // debugger
+            return <ApplicationForm
+            selectedJob={job}/>}}/>
           </div>
         </Switch>
       </div>
-    );
-      }
+      );
+    }
   }

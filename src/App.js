@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './components/Nav';
 import Home from './components/Home'
 import About from './components/About';
+import Footer from "./components/Footer"
 import ProfileContainer from './containers/ProfileContainer'
 // import Login from './components/Login';
 // import User from './components/User';
@@ -31,6 +32,7 @@ export default class App extends React.Component {
     fetch("http://localhost:3000/users/9")
     .then(resp => resp.json())
     .then(data => {
+      //localStorage.clear()
       localStorage["id"] = JSON.stringify(data.id)
       localStorage["name"] = data.name
       localStorage["address"] = data.address
@@ -68,6 +70,7 @@ export default class App extends React.Component {
           jobListings={this.state.jobListings}/>}/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
+        <Footer />
       </div>
     );
   }

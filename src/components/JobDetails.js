@@ -1,5 +1,6 @@
 import React from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
+import { Button } from 'semantic-ui-react'
 
 const JobDetails = (props) => {
     console.log("Selected Job:", props.selectedJob)
@@ -13,7 +14,16 @@ const JobDetails = (props) => {
 
     function handleClick() {
         history.push(`/jobs/${props.selectedJob.id}/application-form`)
+        // return(
+            // <Link to=`/jobs/${props.selectedJob.id}/application-form`>Profile</Link>
+        // )
     }
+
+//   <Link to="/login">
+//      <Button renderAs="button">
+//          <span>Login</span>
+//      </Button>
+//   </Link>
 
     return (
         <div> 
@@ -24,7 +34,15 @@ const JobDetails = (props) => {
             <h3>${props.selectedJob.salary}</h3>
             <h3>{props.selectedJob.details}</h3>
             <h3>Status: {props.selectedJob.status}</h3>
-            <button onClick={handleClick}>Apply For This Job</button>
+            <Link to={`/jobs/${props.selectedJob.id}/application-form`}>
+                <Button renderAs="button">
+                    <span>Apply</span>
+                </Button>
+            </Link>
+
+
+            {/* <button onClick={handleClick}>Apply For This Job</button> */}
+
             {/* <Link to="/jobs/">Gallery Page</Link> */}
             {/* <button onClick={to="/"}>Apply For This job</button> */}
             {/* onClick={() => history.push('/Products')} */}
