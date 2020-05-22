@@ -1,3 +1,4 @@
+//Child of job container
 import React from "react"
 import ApplicationFormContainer from "../containers/ApplicationFormContainer"
 import {
@@ -19,12 +20,14 @@ const ApplicationForm = (props) => {
            <Form.Field
             control={Input}
             label='Full Name'
+            value={localStorage.name}
             placeholder='Full Name'
           />
         </Form.Group>
         <Form.Group widths='equal'>
            <Form.Field
             control={Input}
+            value={localStorage.email}
             label='Email'
             placeholder='Email'
           />
@@ -32,6 +35,7 @@ const ApplicationForm = (props) => {
         <Form.Group widths='equal'>
             <Form.Field
             control={Input}
+            value={localStorage.address}
             label='Address'
             placeholder='Address'
           />

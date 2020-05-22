@@ -21,6 +21,8 @@ export default class App extends React.Component {
     }
   }
 
+  // localStorage["user"] = this.state.user.name
+
   componentDidMount() {
     fetch("http://localhost:3000/job_listings")
     .then(resp => resp.json())
@@ -29,7 +31,12 @@ export default class App extends React.Component {
     fetch("http://localhost:3000/users/9")
     .then(resp => resp.json())
     .then(data => {
-      this.setState({ user: data })
+      localStorage["id"] = JSON.stringify(data.id)
+      localStorage["name"] = data.name
+      localStorage["address"] = data.address
+      localStorage["email"] = data.email
+      localStorage["phone_number"] = data.phone_number
+      return this.setState({ user: data })
     })
 
     fetch(`http://localhost:3000/apps`)
