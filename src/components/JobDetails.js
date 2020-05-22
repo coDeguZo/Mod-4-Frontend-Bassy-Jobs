@@ -10,6 +10,7 @@ const JobDetails = (props) => {
             <h3>${props.selectJob.salary}</h3>
             <h3>{props.selectJob.details}</h3>
             <h3>Status: {props.selectJob.status}</h3>
+            <button>Apply For This job</button>
         </div>
     )
 }

@@ -7,7 +7,7 @@ import ProfileContainer from './containers/ProfileContainer'
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
-import ApplicationContainer from './containers/ApplicationContainer'
+import ApplicationFormContainer from './containers/ApplicationFormContainer'
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 
@@ -17,8 +17,8 @@ export default class App extends React.Component {
     super()
     this.state = {
       jobListings: [],
-      user: [],
-      number: 5
+      user: {},
+      applications: []
     }
   }
 
@@ -29,38 +29,23 @@ export default class App extends React.Component {
 
     fetch("http://localhost:3000/users/5")
     .then(resp => resp.json())
-    .then(data => this.setState({user: data}))
+    .then(data => {
+      this.setState({ user: data })
+    })
+
+    fetch(`http://localhost:3000/apps`)
+        .then(resp => resp.json())
+        .then(d => {
+            const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+            this.setState({applications: filteredApplications})
+          }
+        )
   }
 
 
 
   render(){
     return (
-    //   <div className="App">
-    //     <Switch>
-    //       <Route exact path="/about" component={About} />
-    //       <Route exact path="/jobs" render={() => <JobContainer
-    //         onSearchHandler={this.onSearchHandler}
-    //         filterTerm={this.state.searchTerm}
-    //         paintings={this.state.paintingsList}
-    //         onSelectPainting={this.onSelectPainting}
-    //       />} />
-    //       <Route exact path="/paintings/:id" render={
-    //         (routerProps) => {
-    //           //get the ID here in this function
-    //           let id = routerProps.match.params.id
-    //           //find the painting object in my paintingsList [] with this id
-    //           let painting = this.state.paintingsList.find(p => p.id == id)
-    //           console.log("what is my painting?", painting)
-    //           return <PaintingDetails painting={painting}/>
-    //         }
-    //       }
-    //       />
-    //       <Route render={() => <div>404 Not Found</div>}/>
-    //     </Switch>
-    //   </div>
-    // );
-    // return (
       <div className="App">
         <Nav />
         <Switch>
@@ -68,13 +53,15 @@ export default class App extends React.Component {
         <Route exact path="/about" component={About}/>
         <Route exact path="/profile" render={() => <ProfileContainer 
           user={this.state.user} 
-          number={this.state.user.id}
+          applications={this.state.applications}
         />}/>
         {/* <Login /> */}
         {/* <User />
         <Company /> */}
         <Route exact path="/jobs" render={() => <JobContainer 
           jobListings={this.state.jobListings}/>}/>
+        <Route exath path="/jobs/application-form" render={() => <ApplicationFormContainer
+        />}/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
       </div>
