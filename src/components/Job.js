@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image, Card } from 'semantic-ui-react'
 
 // class Job extends React.Component{
 
@@ -8,13 +8,18 @@ const Jobs = (props) => {
     // console.log(props)
     return (
         <div> 
-            <h1>{props.j.name}</h1>
-            <h3>Experience Level: {props.j.experience_level}</h3>
-            {/* <h3>Education Required: {props.j.education_level}</h3> */}
-            <h3>${props.j.salary}</h3>
-            {/* <h3>{props.j.details}</h3> */}
-            {/* <h3>Status: {props.j.status}</h3> */}
-            <button onClick={() => (props.fetchJob(props.j.id))}>Click Here For Details</button>
+            <Card fluid className="job-card">
+                <Card.Content>
+                    <h1>{props.j.company.name}</h1>
+                    <h2>{props.j.name}</h2>
+                    <h3>Experience Level: {props.j.experience_level}</h3>
+                    {/* <h3>Education Required: {props.j.education_level}</h3> */}
+                    <h3>${props.j.salary}</h3>
+                    {/* <h3>{props.j.details}</h3> */}
+                    {/* <h3>Status: {props.j.status}</h3> */}
+                </Card.Content>
+                    <button onClick={() => (props.fetchJob(props.j.id))}>Click Here For Details</button>
+            </Card>
         </div>
     )
 }

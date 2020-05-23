@@ -63,7 +63,6 @@ export default class JobContainer extends React.Component {
                 {
                   this.props.jobListings.map(j => 
                   <Job j={j} key={j.id} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>
-                  //  </Card.Group>
                   ) 
                 }   
                   </Grid.Column>
