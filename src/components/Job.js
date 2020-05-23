@@ -6,7 +6,7 @@ const Jobs = (props) => {
 
     return (
         <div> 
-            <Card fluid className="job-card">
+            <Card fluid className="job-card" onClick={() => (props.fetchJob(props.j.id))} >
                 <Link>
                     <Card.Content>
                         <h1>{props.j.company.name}</h1>

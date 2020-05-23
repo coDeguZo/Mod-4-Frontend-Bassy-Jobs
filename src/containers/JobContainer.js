@@ -21,7 +21,7 @@ export default class JobContainer extends React.Component {
     fetch(`http://localhost:3000/job_listings/${id}`)
     .then(resp => resp.json())
     .then(data => this.setState({ selectedJob: data }))
-    this.setState({ details: !this.state.details })
+    this.setState({ details: true })
   }
 
   applyForJob = () => {
