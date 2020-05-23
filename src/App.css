@@ -56,3 +56,29 @@
   justify-content: right;
 }
 
+.job-details {
+  position: fixed;
+}
+
+.profile-text-info {
+  text-align: left;
+  padding-left: 30px;
+}
+
+/* .application-card {
+  height: 500px;
+  width: 10000px;
+} */
+
+/* .application-box {
+  /* background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZQAAAB9CAMAAACyJ2VsAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQdvoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABOA8XBAAGwGMP0AAAAAElFTkSuQmCC"); */
+  /* background-image: url("..images/grey_box/jpg") */
+/* } */ 
+
+.profile-info-fixed {
+  position: fixed;
+}
+
+.edit-profile-info-div {
+  padding-left: 50px;
+}

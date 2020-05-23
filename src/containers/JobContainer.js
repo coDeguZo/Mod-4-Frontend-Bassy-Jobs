@@ -43,31 +43,32 @@ export default class JobContainer extends React.Component {
                 "Accept": "application/json"},
       body: JSON.stringify(obj)
     }).then(resp => resp.json())
-       .then(data => {
-        this.props.addApplication(data)
+      //  .then(data => {
+      //   this.props.addApplication(data)
         // window.location()
-      })
+      // })
   }
 
   render(){
-    console.log("job container: ", this.props)
     return (
       <div className="job-container">
         <Switch>
           <Route exact path={"/jobs"} render={ () => 
              <div>
                <JobContainerDropdown/>
+               <br/>
+               <br/>
               <Grid columns={2} divided>
                 <Grid.Row>
                   <Grid.Column>
                 {
                   this.props.jobListings.map(j => 
-                  <Job j={j} key={j.id} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>
+                  <Job j={j} key={j.id} selectedJob={this.state.selectedJob} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>
                   ) 
                 }   
                   </Grid.Column>
                   <Grid.Column>
-                  <div>
+                  <div className="job-details">
                     {this.state.details === true ? <JobDetails selectedJob={this.state.selectedJob}/> : null}
                   </div>
                   </Grid.Column>
