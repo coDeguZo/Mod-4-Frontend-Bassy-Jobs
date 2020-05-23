@@ -72,7 +72,7 @@ export default class App extends React.Component {
         <Route exact path="/profile" render={() => <ProfileContainer 
           user={this.state.user} 
           applications={this.state.applications}
-          deleteApp={this.deleteAppFromState}
+          deleteAppFromState={this.deleteAppFromState}
         />}/>
         {/* <Login /> */}
         {/* <User />
