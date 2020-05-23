@@ -34,6 +34,10 @@ import {Link} from 'react-router-dom'
     //   }
     //   // const selectedJobFetch = props.selectedJob.id
     // }
+
+    function refreshPage() {
+      window.location.reload(false);
+    }
     
     return (
         <div> 
@@ -72,7 +76,7 @@ import {Link} from 'react-router-dom'
           control={Checkbox}
           label='I agree to the Terms and Conditions'
         />
-       <Link to="/profile"> <Form.Field onClick={props.handleSubmit} control={Button}>Submit</Form.Field></Link> 
+       <Link to="/profile"> <Form.Field onClick={() => (props.handleSubmit(), refreshPage())} control={Button}>Submit</Form.Field></Link> 
 
         </Form>
         </div>

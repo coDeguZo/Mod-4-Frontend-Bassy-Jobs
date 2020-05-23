@@ -3,6 +3,8 @@ import Job from '../components/Job'
 import JobDetails from '../components/JobDetails'
 import ApplicationForm from '../components/ApplicationForm'
 import {Route, Switch} from 'react-router-dom'
+import JobContainerDropdown from '../components/JobContainerDropdown';
+import { Card, Grid } from 'semantic-ui-react'
 // import {Router, Route, Switch} from 'react-router-dom'
 
 
@@ -54,12 +56,24 @@ export default class JobContainer extends React.Component {
         <Switch>
           <Route exact path={"/jobs"} render={ () => 
              <div>
-             {
-               this.props.jobListings.map(j => <Job j={j} key={j.id} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>) 
-             }   
-             <div>
-               {this.state.details === true ? <JobDetails selectedJob={this.state.selectedJob}/> : null}
-             </div>
+               <JobContainerDropdown/>
+              <Grid columns={2} divided>
+                <Grid.Row>
+                  <Grid.Column>
+                {
+                  this.props.jobListings.map(j => 
+                  <Job j={j} key={j.id} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>
+                  //  </Card.Group>
+                  ) 
+                }   
+                  </Grid.Column>
+                  <Grid.Column>
+                  <div>
+                    {this.state.details === true ? <JobDetails selectedJob={this.state.selectedJob}/> : null}
+                  </div>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
            </div>
           } />
           <div>
@@ -69,6 +83,7 @@ export default class JobContainer extends React.Component {
               // debugger
             return <ApplicationForm
             selectedJob={job} handleSubmit={this.applyForJob}/>}}/>
+          {/* </Grid> */}
           </div>
         </Switch>
       </div>

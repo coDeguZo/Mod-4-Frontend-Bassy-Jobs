@@ -78,7 +78,9 @@ export default class App extends React.Component {
         {/* <User />
         <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
-          jobListings={this.state.jobListings} addApplication={this.addApplication}/>}/>
+          jobListings={this.state.jobListings} 
+          addApplication={this.addApplication}/>
+          }/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
         <Footer />
