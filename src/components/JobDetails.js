@@ -35,7 +35,7 @@ const JobDetails = (props) => {
             <h3>{props.selectedJob.details}</h3>
             <h3>Status: {props.selectedJob.status}</h3>
             <Link to={`/jobs/${props.selectedJob.id}/application-form`}>
-                <Button renderAs="button">
+                <Button renderas="button">
                     <span>Apply</span>
                 </Button>
             </Link>

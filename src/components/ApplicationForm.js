@@ -10,6 +10,8 @@ import {
     Select,
     TextArea,
   } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
+
 
   const ApplicationForm = (props) => {
 
@@ -36,7 +38,7 @@ import {
     return (
         <div> 
             Application Form
-         <Form>
+      <Form >
          <Form.Group widths='equal'>
            <Form.Field
             control={Input}
@@ -70,66 +72,11 @@ import {
           control={Checkbox}
           label='I agree to the Terms and Conditions'
         />
-        <Form.Field control={Button}>Submit</Form.Field>
+       <Link to="/profile"> <Form.Field onClick={props.handleSubmit} control={Button}>Submit</Form.Field></Link> 
+
         </Form>
         </div>
     )
 }
-
-
-
-// class ApplicationForm extends React.Component{
-//   constructor(){
-//     super()
-//     this.state = {
-//         job: this.props.selectedJob
-//         // job: this.props.selectedJob
-//       }
-//     }
-
-//   render(){
-//     return(
-//         <div> 
-//             Application Form
-//          <Form>
-//          <Form.Group widths='equal'>
-//            <Form.Field
-//             control={Input}
-//             label='Full Name'
-//             value={localStorage.name}
-//             placeholder='Full Name'
-//           />
-//         </Form.Group>
-//         <Form.Group widths='equal'>
-//            <Form.Field
-//             control={Input}
-//             value={localStorage.email}
-//             label='Email'
-//             placeholder='Email'
-//           />
-//         </Form.Group>
-//         <Form.Group widths='equal'>
-//             <Form.Field
-//             control={Input}
-//             value={localStorage.address}
-//             label='Address'
-//             placeholder='Address'
-//           />
-//         </Form.Group>
-//         <Form.Field
-//           control={TextArea}
-//           label='Work Experience'
-//           placeholder='Tell us more about you...'
-//         />
-//         <Form.Field
-//           control={Checkbox}
-//           label='I agree to the Terms and Conditions'
-//         />
-//         <Form.Field control={Button}>Submit</Form.Field>
-//         </Form>
-//       </div>
-//     )
-//   }
-// }
 
 export default ApplicationForm;

@@ -50,6 +50,16 @@ export default class App extends React.Component {
         )
   }
 
+  addApplication = (data) => {
+    this.setState({applications: [...this.state.applications, data]})
+  }
+
+  deleteAppFromState = (id) => {
+    const filteredApplications = this.state.applications.filter(app => {
+      return app.id !== id
+    })
+    this.setState({applications: filteredApplications})
+  }
 
 
   render(){
@@ -62,12 +72,13 @@ export default class App extends React.Component {
         <Route exact path="/profile" render={() => <ProfileContainer 
           user={this.state.user} 
           applications={this.state.applications}
+          deleteApp={this.deleteAppFromState}
         />}/>
         {/* <Login /> */}
         {/* <User />
         <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
-          jobListings={this.state.jobListings}/>}/>
+          jobListings={this.state.jobListings} addApplication={this.addApplication}/>}/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
         <Footer />

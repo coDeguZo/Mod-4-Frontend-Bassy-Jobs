@@ -22,6 +22,33 @@ export default class JobContainer extends React.Component {
     this.setState({ details: !this.state.details })
   }
 
+  applyForJob = () => {
+    console.log("adsfasdfasdfasdf")
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date+' '+time;
+    
+    let obj = {
+      application_date: dateTime,
+      job_listing_id: this.state.selectedJob.id,
+      status: "pending",
+      user_id: parseInt(localStorage.id)
+    }
+    
+    fetch(`http://localhost:3000/apps`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json",
+                "Accept": "application/json"},
+      body: JSON.stringify(obj)
+    }).then(resp => resp.json())
+      //  .then(data => {
+      //   // this.props.addApplication(data)
+      //   // window.location()
+      // })
+      // location.reload()
+  }
+
   render(){
     console.log("job container: ", this.props)
     return (
@@ -43,7 +70,7 @@ export default class JobContainer extends React.Component {
               let job = this.props.jobListings.find(j => j.id === id)
               // debugger
             return <ApplicationForm
-            selectedJob={job}/>}}/>
+            selectedJob={job} handleSubmit={this.applyForJob}/>}}/>
           </div>
         </Switch>
       </div>

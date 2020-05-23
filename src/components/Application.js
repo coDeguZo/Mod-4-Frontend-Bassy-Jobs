@@ -1,15 +1,18 @@
+//child of ProfileContainer
 import React from "react"
 
 const Application = (props) => {
+    console.log(props)
     // console.log(props.apps)
     // debugger
     // console.log(props.a.job_listing)
     return(
         <div>
-            <br></br>
+            {/* <br></br> */}
             <h3>Position: {props.a.job_listing.name}</h3>
             <h3>Salary: {props.a.job_listing.salary}</h3>
             <h3>Status: {props.a.status}</h3>
+            <button onClick={() => props.deleteApplication(props.a.id)}>Delete your application</button>
         </div>
     )
 }
