@@ -23,7 +23,6 @@ export default class JobContainer extends React.Component {
   }
 
   applyForJob = () => {
-    console.log("adsfasdfasdfasdf")
     const today = new Date();
     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -42,11 +41,10 @@ export default class JobContainer extends React.Component {
                 "Accept": "application/json"},
       body: JSON.stringify(obj)
     }).then(resp => resp.json())
-      //  .then(data => {
-      //   // this.props.addApplication(data)
-      //   // window.location()
-      // })
-      // location.reload()
+       .then(data => {
+        this.props.addApplication(data)
+        // window.location()
+      })
   }
 
   render(){

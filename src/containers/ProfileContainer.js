@@ -11,8 +11,6 @@ class ProfileContainer extends React.Component {
     // }
 
     deleteApplication = (id) => {
-        console.log("deleting", id)
-        console.log(this.props)
         fetch(`http://localhost:3000/apps/${id}`, {
             method: "DELETE"
         }).then(resp => resp.json())
@@ -22,7 +20,7 @@ class ProfileContainer extends React.Component {
     }
 
     render(){
-        console.log(this.props)
+        // window.location.reload(false)
         return(
             <div>
                 Profile Container
