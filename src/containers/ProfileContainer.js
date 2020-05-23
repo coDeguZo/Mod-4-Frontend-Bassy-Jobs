@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component {
         const obj = {
             name: this.state.name,
             email: this.state.email,
-            phone: this.state.phone,
+            phone_number: this.state.phone,
             address: this.state.address
         }
         fetch(`http://localhost:3000/users/${id}`, {
@@ -48,6 +48,12 @@ class ProfileContainer extends React.Component {
             headers: {"Content-Type": "application/json",
                     "Accept" : "application/json"},
             body: JSON.stringify(obj)
+        }).then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                edit: false
+            })
+            window.location.reload()
         })
     }
 
