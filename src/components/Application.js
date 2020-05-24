@@ -1,12 +1,15 @@
 //child of ProfileContainer
 import React from "react"
 import { Grid, Image, Card } from 'semantic-ui-react'
+// import greyBox from `../images/grey_box.jpg`
 
 const Application = (props) => {
     // console.log(props)
-    let greyBox = require(`../images/grey_box.jpg`)
+    // let greyBox = require(`../images/grey_box.jpg`)
+    // let greyBox2 = require("/grey_box.jpg")
     return(
-        <div>
+        // <div  styles={{ backgroundImage:`url(${greyBox})` }}>
+        <div className="grey-box">
         <Card.Group>
             <Card fluid className="application-box">
                 <Card.Content>
