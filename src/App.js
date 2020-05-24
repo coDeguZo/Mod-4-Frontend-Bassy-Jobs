@@ -65,9 +65,9 @@ export default class App extends React.Component {
     this.setState({applications: filteredApplications})
   }
 
-  resetJobListings = () => {
-    this.setState({jobListings: this.state.masterJobListings})
-  }
+  // resetJobListings = () => {
+  //   this.setState({jobListings: this.state.masterJobListings})
+  // }
 
   sortJobListingsBySalary = (event) => {
     const salaryRangeArr = event.target.innerText.replace("$", "").replace("$", "").replace("+", "").split("-")
