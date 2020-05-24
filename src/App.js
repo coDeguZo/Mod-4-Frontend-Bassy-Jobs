@@ -86,6 +86,22 @@ export default class App extends React.Component {
     }
   }
 
+  sortJobListingsByExp = (event) => {
+    console.log("exp", event.target.innerText)
+    const expLevel = event.target.innerText
+    let sortedByExp = ''
+
+    if(expLevel === 'All' || expLevel === ''){
+      this.setState({jobListings: this.state.masterJobListings})
+    }
+    else{
+      sortedByExp = this.state.masterJobListings.filter(job => {
+        return job.experience_level === expLevel
+      })
+      this.setState({ jobListings: sortedByExp })
+    }
+  }
+
   render(){
     return (
       <div className="App">
@@ -103,6 +119,7 @@ export default class App extends React.Component {
         <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
           sortJobListingsBySalary={this.sortJobListingsBySalary}
+          sortJobListingsByExp={this.sortJobListingsByExp}
           jobListings={this.state.jobListings} 
           addApplication={this.addApplication}/>
           }/>

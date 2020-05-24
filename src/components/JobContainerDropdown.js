@@ -11,7 +11,7 @@ const bySalary = [
 ]
 
 const byEducationLevel = [
-    { key: 1, text: 'Sort by education level', value: 1 },
+    { key: 1, text: 'All', value: 1 },
     { key: 2, text: 'Highschool Diploma', value: 2 },
     { key: 3, text: "Bachelor's Degree", value: 3 },
     { key: 4, text: "Master's Degree", value: 4 },
@@ -19,7 +19,7 @@ const byEducationLevel = [
 ]
 
 const byExperienceLevel = [
-    { key: 1, text: 'Sort by experience level', value: 1 },
+    { key: 1, text: 'All', value: 1 },
     { key: 2, text: 'Junior', value: 2 },
     { key: 3, text: 'Mid', value: 3 },
     { key: 4, text: 'Senior', value: 4 }
@@ -52,7 +52,7 @@ const jobContainerDropdown = (props) => (
                     clearable
                     placeholder={"sort by experience level"}
                     options={byExperienceLevel} selection 
-                    onChange={console.log("exp")}/>
+                    onChange={(event) => props.sortJobListingsByExp(event)}/>
                  </Grid.Column>
             </Grid.Row>
         </Grid>
