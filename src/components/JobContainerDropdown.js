@@ -43,7 +43,7 @@ const jobContainerDropdown = (props) => (
                     clearable
                     placeholder={"sort by education level"}
                     options={byEducationLevel} selection 
-                    onChange={console.log("education")}/>
+                    onChange={(event) => props.sortJobListingsByEdLevel(event)}/>
                     
                 </Grid.Column>
                 <Grid.Column>

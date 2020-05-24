@@ -89,16 +89,30 @@ export default class App extends React.Component {
   sortJobListingsByExp = (event) => {
     console.log("exp", event.target.innerText)
     const expLevel = event.target.innerText
-    let sortedByExp = ''
 
     if(expLevel === 'All' || expLevel === ''){
       this.setState({jobListings: this.state.masterJobListings})
-    }
-    else{
-      sortedByExp = this.state.masterJobListings.filter(job => {
+    }else{
+      const sortedByExp = this.state.masterJobListings.filter(job => {
         return job.experience_level === expLevel
       })
       this.setState({ jobListings: sortedByExp })
+    }
+  }
+
+  sortJobListingsByEdLevel = (event) => {
+    console.log("EDU", event.target.innerText)
+    const edLevel = event.target.innerText
+    // let sortedByEd = ''
+    // we need some sort of sorting logic here to deal with how our seed data looks. maybe .replace a bunch of times?
+
+    if(edLevel === 'All' || edLevel === ''){
+      this.setState({jobListings: this.state.masterJobListings})
+    }else{
+      const sortedByEd = this.state.masterJobListings.filter(job => {
+        return job.education_level === edLevel
+      })
+      this.setState({ jobListings: sortedByEd })
     }
   }
 
@@ -118,6 +132,7 @@ export default class App extends React.Component {
         {/* <User />
         <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
+          sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}
           sortJobListingsByExp={this.sortJobListingsByExp}
           jobListings={this.state.jobListings} 
