@@ -16,6 +16,7 @@ export default class App extends React.Component {
   constructor(){
     super()
     this.state = {
+      masterJobListings: [],
       jobListings: [],
       user: {},
       applications: []
@@ -27,7 +28,10 @@ export default class App extends React.Component {
   componentDidMount() {
     fetch("http://localhost:3000/job_listings")
     .then(resp => resp.json())
-    .then(data => this.setState({ jobListings: data }))
+    .then(data => this.setState({ 
+      jobListings: data,
+      masterJobListings: data
+    }))
 
     fetch("http://localhost:3000/users/13")
     .then(resp => resp.json())
@@ -61,6 +65,26 @@ export default class App extends React.Component {
     this.setState({applications: filteredApplications})
   }
 
+  resetJobListings = () => {
+    this.setState({jobListings: this.state.masterJobListings})
+  }
+
+  sortJobListingsBySalary = (event) => {
+    const salaryRangeArr = event.target.innerText.replace("$", "").replace("$", "").replace("+", "").split("-")
+    if(salaryRangeArr[0] === 'All' || salaryRangeArr[0] === ''){
+      this.setState({jobListings: this.state.masterJobListings})
+    }else{
+    
+    if(salaryRangeArr.length === 1){
+      salaryRangeArr.push(salaryRangeArr[0] * 1000)
+    }
+
+    const sortedBySalary = this.state.masterJobListings.filter(job => {
+      return job.salary >= parseInt(salaryRangeArr[0]) && job.salary <= parseInt(salaryRangeArr[1])
+    })
+    this.setState({ jobListings: sortedBySalary })
+    }
+  }
 
   render(){
     return (
@@ -78,6 +102,7 @@ export default class App extends React.Component {
         {/* <User />
         <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
+          sortJobListingsBySalary={this.sortJobListingsBySalary}
           jobListings={this.state.jobListings} 
           addApplication={this.addApplication}/>
           }/>

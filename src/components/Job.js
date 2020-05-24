@@ -18,7 +18,7 @@ const Jobs = (props) => {
                         {/* <h3>Status: {props.j.status}</h3> */}
                         
                     </Card.Content>
-                        <button onClick={() => (props.fetchJob(props.j.id))}>Click Here For Details</button>
+                        {/* <button onClick={() => (props.fetchJob(props.j.id))}>Click Here For Details</button> */}
                 </Link>
             </Card>
         </div>

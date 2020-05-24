@@ -55,7 +55,7 @@ export default class JobContainer extends React.Component {
         <Switch>
           <Route exact path={"/jobs"} render={ () => 
              <div>
-               <JobContainerDropdown/>
+               <JobContainerDropdown sortJobListingBySalary={this.props.sortJobListingsBySalary}/>
                <br/>
                <br/>
               <Grid columns={2} divided>
