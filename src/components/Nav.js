@@ -3,6 +3,12 @@ import { Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 class Nav extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            employer: localStorage.is_employer
+        }
+    }
 
     render(){
         return(
@@ -15,10 +21,11 @@ class Nav extends React.Component {
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
                 <Link to="/jobs">Jobs</Link>
-                {this.props.isLoggedIn === "true" ? <Link to="/profile">Profile</Link> : null}
+                {this.props.isLoggedIn === "true" && this.state.employer === "false" ? <Link to="/profile">Profile</Link> : null}
+                {this.props.isLoggedIn === "true" && this.state.employer === "true" ? <Link to="/employer-profile">Employer Profile</Link> : null}                
                 {/* {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>} */}
                 {/* {this.props.isLoggedIn === "true" ? <Link onClick={this.props.logOut} to="/login"> Log Out</Link> : <Link to="/login">Log In</Link>} */}
-                {this.props.isLoggedIn === "true" ? <Link onClick={this.props.logOut} to="/login"> Log Out</Link> : null}
+                {this.props.isLoggedIn === "true" ? <Link onClick={this.props.logOut} to="/"> Log Out</Link> : null}
                 {this.props.isLoggedIn === undefined || this.props.isLoggedIn === false ?
                 <div className="dropdown1">
                     <button className="dropbtn">For Employers

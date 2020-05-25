@@ -45,6 +45,7 @@ export default class App extends React.Component {
           localStorage["address"] = data.address
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
+          localStorage["is_employer"] = data.is_employer
           // localStorage["password"] = data.password
           localStorage.setItem("loggedIn", JSON.parse('true'))
           // debugger
@@ -95,6 +96,7 @@ export default class App extends React.Component {
           localStorage["id"] = JSON.stringify(data.id)
           localStorage["name"] = data.name
           localStorage["email"] = data.email
+          localStorage["is_employer"] = data.is_employer
           localStorage.setItem("loggedIn", JSON.parse('true'))
           // debugger
           return this.setState({ company: data })
@@ -174,6 +176,7 @@ export default class App extends React.Component {
   logOut = () => {
     localStorage.clear()
     this.setState({ user: {}, 
+      company: {},
       isLoggedIn: false,
       applications: [] })
   }
