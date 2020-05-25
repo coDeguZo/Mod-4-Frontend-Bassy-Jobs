@@ -35,11 +35,19 @@ const JobDetails = (props) => {
                 <h3>${props.selectedJob.salary}</h3>
                 <h3>{props.selectedJob.details}</h3>
                 <h3>Status: {props.selectedJob.status}</h3>
+                {localStorage.email === undefined ? 
+                <Link to={`/login`}>
+                    <Button renderas="button">
+                        Apply
+                    </Button>
+                </Link>
+                : 
                 <Link to={`/jobs/${props.selectedJob.id}/application-form`}>
                     <Button renderas="button">
                         Apply
                     </Button>
                 </Link>
+                }
             </Card>
         </div>
     )

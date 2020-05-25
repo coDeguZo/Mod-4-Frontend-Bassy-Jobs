@@ -23,7 +23,7 @@ export default class App extends React.Component {
       applications: [],
       isLoggedIn: localStorage.loggedIn,
       name: "",
-      password: "",
+      // password: "",
       email: "",
       address: "",
       phone_number: ""
@@ -42,7 +42,7 @@ export default class App extends React.Component {
           localStorage["address"] = data.address
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
-          localStorage["password"] = data.password
+          // localStorage["password"] = data.password
           localStorage.setItem("loggedIn", JSON.parse('true'))
           // debugger
           return this.setState({ user: data })
@@ -165,8 +165,8 @@ export default class App extends React.Component {
       name: this.state.name,
       email: this.state.email,
       phone_number: this.state.phone_number,
+      // password: this.state.password
       address: this.state.address,
-      password: this.state.password
     }
     
     fetch('http://localhost:3000/users', {

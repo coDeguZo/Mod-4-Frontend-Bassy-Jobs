@@ -18,6 +18,26 @@ class Nav extends React.Component {
                 {this.props.isLoggedIn === "true" ? <Link to="/profile">Profile</Link> : null}
                 {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
                 {this.props.isLoggedIn === "true" ? <Link onClick={this.props.logOut} to="/login"> Log Out</Link> : <Link to="/login">Log In</Link>}
+                <div className="dropdown1">
+                    <button className="dropbtn">For Employers
+                    <i className="fa fa-caret-down"></i>
+                    </button>
+                    <div className="dropdown-content">
+                    <a href="#">Log in</a>
+                    <a href="#">Sign up</a>
+                    <a href="#">Employer</a>
+                    </div>
+                </div>
+                <div className="dropdown2">
+                    <button className="dropbtn">For Job Seekers
+                    <i className="fa fa-caret-down"></i>
+                    </button>
+                    <div className="dropdown-content">
+                    <a href="#">Log in</a>
+                    <a href="#">Sign up</a>
+                    <a href="#">Job Seeker</a>
+                    </div>
+                </div>
             </div>
         </div>
 
