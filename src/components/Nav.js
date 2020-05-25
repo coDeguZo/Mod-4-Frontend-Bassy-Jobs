@@ -41,8 +41,14 @@ class Nav extends React.Component {
             {this.props.isLoggedIn === "true" ?
             <div className="item">
             <Link to="/profile">Profile</Link>
-            <Link to={`/login`}>
-                <button onClick={this.props.logOut}> Log out </button>
+            </div> 
+            :
+            null
+            }
+            {this.props.isLoggedIn === "true" ?
+            <div className="item">
+            <Link onClick={this.props.logOut} to="/login">
+                Log out
             </Link>
             </div>
             :
