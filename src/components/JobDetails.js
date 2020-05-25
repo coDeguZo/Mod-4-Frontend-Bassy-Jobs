@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom"
 import { Button, Card } from 'semantic-ui-react'
 
 const JobDetails = (props) => {
-    console.log("Selected Job:", props.selectedJob)
+    // console.log("Selected Job:", props.selectedJob)
     // routeChange = () => {
     //     let  = `newPath`;
     //     let history = useHistory();

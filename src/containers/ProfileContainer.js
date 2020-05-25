@@ -12,7 +12,8 @@ class ProfileContainer extends React.Component {
             name: "",
             address: "",
             phone: "",
-            email: ""
+            email: "",
+            // password: ""
         }
     }
 
@@ -41,7 +42,8 @@ class ProfileContainer extends React.Component {
             name: this.state.name,
             email: this.state.email,
             phone_number: this.state.phone,
-            address: this.state.address
+            address: this.state.address,
+            // password: this.state.password
         }
         fetch(`http://localhost:3000/users/${id}`, {
             method: "PATCH",

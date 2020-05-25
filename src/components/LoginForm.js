@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { Button, Form, Segment, Message } from "semantic-ui-react";
 import { Link } from "react-router-dom"
 
+
 class LoginForm extends React.Component {
     state = {
       email: "",
@@ -75,9 +76,32 @@ class LoginForm extends React.Component {
               <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
             </Link>
           </Form>
+          <p>Don't have an account? 
+              <Link to="/sign-up"> Sign up here</Link>
+          </p>
         </Segment>
       );
     }
   }
   
   export default withRouter(LoginForm);
+
+  // <Switch>
+  //       <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
+  //       <Route exact path="/" component={Home}/>
+  //       <Route exact path="/about" component={About}/>
+  //       <Route exact path="/profile" render={() => <ProfileContainer 
+  //         user={this.state.user} 
+  //         applications={this.state.applications}
+  //         deleteAppFromState={this.deleteAppFromState}
+  //       />}/>
+  //       {/* <Company /> */}
+  //       <Route path="/jobs" render={() => <JobContainer 
+  //         sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
+  //         sortJobListingsBySalary={this.sortJobListingsBySalary}
+  //         sortJobListingsByExp={this.sortJobListingsByExp}
+  //         jobListings={this.state.jobListings} 
+  //         addApplication={this.addApplication}/>
+  //         }/>
+  //       {/* <ApplicationContainer applications={this.state.applications}/> */}
+  //       </Switch>

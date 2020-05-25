@@ -1,20 +1,6 @@
 import React from "react"
-import { Header} from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import {
-    Button,
-    Container,
-    Divider,
-    Grid,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Responsive,
-    Segment,
-    Sidebar,
-    Visibility,
-  } from 'semantic-ui-react'
 
 class Nav extends React.Component {
 
@@ -30,6 +16,7 @@ class Nav extends React.Component {
                 <Link to="/about">About</Link>
                 <Link to="/jobs">Jobs</Link>
                 {this.props.isLoggedIn === "true" ? <Link to="/profile">Profile</Link> : null}
+                {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
                 {this.props.isLoggedIn === "true" ? <Link onClick={this.props.logOut} to="/login"> Log Out</Link> : <Link to="/login">Log In</Link>}
             </div>
         </div>

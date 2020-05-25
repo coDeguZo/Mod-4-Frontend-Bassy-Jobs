@@ -5,6 +5,7 @@ import About from './components/About';
 import Footer from "./components/Footer"
 import ProfileContainer from './containers/ProfileContainer'
 import LoginForm from './components/LoginForm';
+import NewUserForm from './components/NewUserForm'
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
@@ -20,7 +21,12 @@ export default class App extends React.Component {
       jobListings: [],
       user: {},
       applications: [],
-      isLoggedIn: localStorage.loggedIn
+      isLoggedIn: localStorage.loggedIn,
+      name: "",
+      password: "",
+      email: "",
+      address: "",
+      phone_number: ""
     }
   }
   // localStorage["user"] = this.state.user.name
@@ -36,6 +42,7 @@ export default class App extends React.Component {
           localStorage["address"] = data.address
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
+          localStorage["password"] = data.password
           localStorage.setItem("loggedIn", JSON.parse('true'))
           // debugger
           return this.setState({ user: data })
@@ -148,12 +155,39 @@ export default class App extends React.Component {
       applications: [] })
   }
 
+  signUpUser = (event) => {
+    console.log(event.target.id)
+    this.setState({ [event.target.id]: event.target.value })
+  }
+
+  createNewUser = () => {
+    const obj = {
+      name: this.state.name,
+      email: this.state.email,
+      phone_number: this.state.phone_number,
+      address: this.state.address,
+      password: this.state.password
+    }
+    
+    fetch('http://localhost:3000/users', {
+      method: "POST",
+      headers: {"Content-Type": "application/json",
+        "Accept": "application/json"},
+      body: JSON.stringify(obj)
+      }).then(resp => resp.json())
+      .then(data => {
+        this.updateCurrentUser(data)
+      })
+      
+  }
+
   render(){
     return (
       <div className="App">
         <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
         <Switch>
         <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
+        <Route exact path="/sign-up" render={() => <NewUserForm signUpUser={this.signUpUser} createNewUser={this.createNewUser}/>}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/profile" render={() => <ProfileContainer 
