@@ -7,7 +7,8 @@ import { Link } from "react-router-dom"
 class LoginForm extends React.Component {
     state = {
       email: "",
-      password: ""
+      password: "",
+      error: true
     };
   
     handleChange = (e, { name, value }) => {
@@ -33,12 +34,14 @@ class LoginForm extends React.Component {
       .then(userData => {
         console.log("response from the server", userData)
         if(userData.error_message){
+          this.setState({ error: true })
           alert(userData.error_message)
         }else{
+          this.setState({ error: false })
           this.props.updateCurrentUser(userData)
+          alert("Welcome To Bassy Jobs!")
         }
       })
-      // 
     };
   
     render() {
@@ -48,15 +51,14 @@ class LoginForm extends React.Component {
           <br/>
           <h1> User Login Form </h1>
           <Form
-            // onSubmit={this.handleLoginSubmit}
             size="mini"
             key="mini"
-            loading={this.props.authenticatingUser}
-            error={this.props.failedLogin}
+            // loading={this.props.authenticatingUser}
+            // error={this.props.failedLogin}
           >
             <Message
-              error
-              header={this.props.failedLogin ? this.props.error : null}
+              // error
+              // header={this.props.failedLogin ? this.props.error : null}
             />
             <Form.Group widths="equal">
               <Form.Input
@@ -65,6 +67,7 @@ class LoginForm extends React.Component {
                 name="email"
                 onChange={this.handleChange}
                 value={this.state.email}
+                onSubmit={this.handleLoginSubmit}
               />
               <Form.Input
                 type="password"
@@ -75,8 +78,11 @@ class LoginForm extends React.Component {
                 value={this.state.password}
               />
             </Form.Group>
-            <Link to ={"/profile"}>
-              <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
+            {/* <Link to="/profile">
+              <Button type="submit" onClick={this.handleLoginSubmit} >Login</Button>
+            </Link> */}
+            <Link to="/">
+              <Button type="redirect" onClick={this.handleLoginSubmit} >Login</Button>
             </Link>
           </Form>
           <p>Don't have an account? 

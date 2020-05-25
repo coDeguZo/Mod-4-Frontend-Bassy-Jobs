@@ -7,7 +7,8 @@ import { Link } from "react-router-dom"
 class CompanyLoginForm extends React.Component {
     state = {
       email: "",
-      password: ""
+      password: "",
+      error: false
     };
   
     handleChange = (e, { name, value }) => {
@@ -75,7 +76,7 @@ class CompanyLoginForm extends React.Component {
                 value={this.state.password}
               />
             </Form.Group>
-            <Link to ={"/company-profile"}>
+            <Link to ={"/employer-profile"}>
               <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
               {/* <Button type="submit" onClick={null}>Login</Button> */}
             </Link>

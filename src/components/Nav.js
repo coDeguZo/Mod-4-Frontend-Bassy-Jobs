@@ -13,11 +13,11 @@ class Nav extends React.Component {
     render(){
         return(
         <div>
-            <div class="topnav">
-            <Link class="active" to="/">Bassy Jobs</Link>
+            <div className="topnav">
+            <Link className="active" to="/">Bassy Jobs</Link>
             <a href="#news">News</a>
             <a href="#contact">Contact</a>
-            <div class="topnav-right">
+            <div className="topnav-right">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
                 <Link to="/jobs">Jobs</Link>

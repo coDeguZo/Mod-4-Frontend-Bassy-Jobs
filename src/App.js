@@ -11,6 +11,7 @@ import NewUserForm from './components/NewUserForm'
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
+import Redir from './components/Redir'
 import './App.css';
 import {Route, Switch, Redirect} from 'react-router-dom'
 
@@ -29,7 +30,8 @@ export default class App extends React.Component {
       // password: "",
       email: "",
       address: "",
-      phone_number: ""
+      phone_number: "",
+      error: true
     }
   }
   // localStorage["user"] = this.state.user.name
@@ -65,24 +67,30 @@ export default class App extends React.Component {
   componentDidMount() {
     // debugger
     fetch("http://localhost:3000/job_listings")
-    .then(resp => resp.json())
-    .then(data => this.setState({ 
-      jobListings: data,
-      masterJobListings: data
-    }))
+      .then(resp => resp.json())
+      .then(data => this.setState({ 
+        jobListings: data,
+        masterJobListings: data
+      }))
 
     let id = parseInt(localStorage.id)
     fetch(`http://localhost:3000/users/${id}`)
-    .then(resp => resp.json())
-    .then(data => {
-      return this.setState({ user: data })
-      })
+      .then(resp => resp.json())
+      .then(data => {
+        return this.setState({ user: data })
+        })
+    
+    fetch(`http://localhost:3000/companies/${id}`)
+      .then(resp => resp.json())
+      .then(data => {
+        return this.setState({ company: data })
+    })
       
       fetch(`http://localhost:3000/apps`)
-      .then(resp => resp.json())
-      .then(d => {
-        const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
-        this.setState({applications: filteredApplications})
+        .then(resp => resp.json())
+        .then(d => {
+          const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+          this.setState({applications: filteredApplications})
       }
     )
   }
@@ -204,7 +212,10 @@ export default class App extends React.Component {
       .then(data => {
         this.updateCurrentUser(data)
       })
-      
+  }
+
+  errorMsg = () => {
+    alert("no")
   }
 
   render(){
@@ -212,27 +223,28 @@ export default class App extends React.Component {
       <div className="App">
         <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
         <Switch>
-        <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
-        <Route exact path="/login-company" render={ () => <CompanyLoginForm updateCurrentCompany={this.updateCurrentCompany}/>} />
+        <Route exact path="/login" render={ () => <LoginForm errorMsg={this.state.errorMsg} updateCurrentUser={this.updateCurrentUser}  />}/>
+        <Route exact path="/login-company" render={ () => <CompanyLoginForm errorMsg={this.state.errorMsg} updateCurrentCompany={this.updateCurrentCompany}/>} />
         <Route exact path="/sign-up" render={() => <NewUserForm signUpUser={this.signUpUser} createNewUser={this.createNewUser}/>}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
-        <Route exact path="/profile" render={() => <ProfileContainer 
+        <Route exact path="/profile" render={() => this.state.user === {} ? <Redir to="/login"/> :
+        <ProfileContainer 
           user={this.state.user} 
           applications={this.state.applications}
           deleteAppFromState={this.deleteAppFromState}
-        />}/>
-        <Route exact path="/company-profile" render={() => <CompanyContainer />}/>
+        />
+        } />
+        <Route exact path="/employer-profile" render={() => <CompanyContainer company={this.state.company}/>}/>
         <Route path="/jobs" render={() => <JobContainer 
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}
           sortJobListingsByExp={this.sortJobListingsByExp}
           jobListings={this.state.jobListings} 
-          addApplication={this.addApplication}/>
-          }/>
-        {/* <ApplicationContainer applications={this.state.applications}/> */}
+          addApplication={this.addApplication}/>} />
+          {/* Breaks code and takes us home. */}
+        <Route exact path="/profile" render={() => <Redirect />}/>
         </Switch>
-        {/* <Footer /> */}
       </div>
     );
   }
