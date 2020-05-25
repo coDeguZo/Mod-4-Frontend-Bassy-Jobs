@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { Button, Form, Segment, Message } from "semantic-ui-react";
+import { Link } from "react-router-dom"
 
 class LoginForm extends React.Component {
     state = {
@@ -16,8 +17,8 @@ class LoginForm extends React.Component {
     //When form is submitted, make a fetch to "log in the user"
     handleLoginSubmit = () => {
       console.log("attempting to log in")
-    //   fetch("http://localhost:3000/api/v1/login", {
-        fetch("http://localhost:3000/login", {
+      // fetch("http://localhost:3000/api/v1/login", {
+      fetch("http://localhost:3000/login", {
         method:"POST",
         headers: {
           "Content-Type" : "application/json",
@@ -36,13 +37,14 @@ class LoginForm extends React.Component {
           this.props.updateCurrentUser(userData)
         }
       })
+      // 
     };
   
     render() {
       return (
         <Segment>
           <Form
-            onSubmit={this.handleLoginSubmit}
+            // onSubmit={this.handleLoginSubmit}
             size="mini"
             key="mini"
             loading={this.props.authenticatingUser}
@@ -69,7 +71,9 @@ class LoginForm extends React.Component {
                 value={this.state.password}
               />
             </Form.Group>
-            <Button type="submit">Login</Button>
+            <Link to ={"/profile"}>
+              <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
+            </Link>
           </Form>
         </Segment>
       );

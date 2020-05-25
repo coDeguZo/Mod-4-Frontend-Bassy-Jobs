@@ -20,6 +20,8 @@ class Nav extends React.Component {
 
     render(){
         return(
+        // <Menu pointing secondary>
+        //  <Fragment>
         <div> 
             <div className={`ui inverted blue menu navbar`}>
             <h2 className="ui header">
@@ -36,65 +38,28 @@ class Nav extends React.Component {
             <div className="item">
                 <Link to="/jobs">Jobs</Link>
             </div>
+            {this.props.isLoggedIn === "true" ?
             <div className="item">
             <Link to="/profile">Profile</Link>
-                {/* Login/Profile */}
+            <Link to={`/login`}>
+                <button onClick={this.props.logOut}> Log out </button>
+            </Link>
             </div>
+            :
             <div className="item">
-            <Link to="/Login">Log In</Link>
-                {/* Login/Profile */}
+            <Link to="/login">Log In</Link>
             </div>
+            }
             </div>
         </div>
-    //     const getWidth = () => {
-    //         const isSSR = typeof window === 'undefined'
-    //         return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
-    //       }
-    // return (
-    //     <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-    //     <Visibility
-    //       once={false}
-    //       onBottomPassed={this.showFixedMenu}
-    //       onBottomPassedReverse={this.hideFixedMenu}
-    //     >
-    //       <Segment
-    //         inverted
-    //         textAlign='center'
-    //         style={{ minHeight: 700, padding: '1em 0em' }}
-    //         vertical
-    //       >
-    //         <Menu
-    //           fixed={fixed ? 'top' : null}
-    //           inverted={!fixed}
-    //           pointing={!fixed}
-    //           secondary={!fixed}
-    //           size='large'
-    //         >
-    //           <Container>
-    //             <Menu.Item as='a' active>
-    //               Home
-    //             </Menu.Item>
-    //             <Menu.Item as='a'>Work</Menu.Item>
-    //             <Menu.Item as='a'>Company</Menu.Item>
-    //             <Menu.Item as='a'>Careers</Menu.Item>
-    //             <Menu.Item position='right'>
-    //               <Button as='a' inverted={!fixed}>
-    //                 Log in
-    //               </Button>
-    //               <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-    //                 Sign Up
-    //               </Button>
-    //             </Menu.Item>
-    //           </Container>
-    //         </Menu>
-    //         <HomepageHeading />
-    //       </Segment>
-    //     </Visibility>
-
-    //     {children}
-    //   </Responsive>
-        )
+        ) 
     }
 }
+
+{/* <Link to={`/jobs/${props.selectedJob.id}/application-form`}>
+<Button renderas="button">
+    <span>Apply</span>
+</Button>
+</Link> */}
 
 export default Nav

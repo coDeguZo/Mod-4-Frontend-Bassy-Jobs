@@ -9,7 +9,7 @@ import LoginForm from './components/LoginForm';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
 import './App.css';
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 
 
 export default class App extends React.Component {
@@ -19,7 +19,8 @@ export default class App extends React.Component {
       masterJobListings: [],
       jobListings: [],
       user: {},
-      applications: []
+      applications: [],
+      isLoggedIn: localStorage.loggedIn
     }
   }
   // localStorage["user"] = this.state.user.name
@@ -29,13 +30,14 @@ export default class App extends React.Component {
         fetch(`http://localhost:3000/users/${this.state.user.id}`)
         .then(resp => resp.json())
         .then(data => {
-          debugger
           //localStorage.clear()
           localStorage["id"] = JSON.stringify(data.id)
           localStorage["name"] = data.name
           localStorage["address"] = data.address
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
+          localStorage.setItem("loggedIn", JSON.parse('true'))
+          // debugger
           return this.setState({ user: data })
     })
     fetch(`http://localhost:3000/apps`)
@@ -45,19 +47,9 @@ export default class App extends React.Component {
         this.setState({applications: filteredApplications})
       }
     )
-    const t = this
     // debugger
+    this.setState({ isLoggedIn: "true" })
   }
-
-  // storage(){
-  //   this.setState({ user: {
-  //     id: this.localStorage["id"],
-  //     name: this.localStorage["name"],
-  //     address: this.localStorage["address"],
-  //     email: this.localStorage["email"],
-  //     phone_number: this.localStorage["phone_number"]
-  //   } })
-  // }
 
   componentDidMount() {
     // debugger
@@ -69,16 +61,9 @@ export default class App extends React.Component {
     }))
 
     let id = parseInt(localStorage.id)
-    // fetch(`http://localhost:3000/users/${this.state.user.id}`)
     fetch(`http://localhost:3000/users/${id}`)
     .then(resp => resp.json())
     .then(data => {
-    //   //localStorage.clear()
-    //   localStorage["id"] = JSON.stringify(data.id)
-    //   localStorage["name"] = data.name
-    //   localStorage["address"] = data.address
-    //   localStorage["email"] = data.email
-    //   localStorage["phone_number"] = data.phone_number
       return this.setState({ user: data })
       })
       
@@ -89,6 +74,11 @@ export default class App extends React.Component {
         this.setState({applications: filteredApplications})
       }
     )
+    // if(this.localStorage.isLoggedIn === "true"){
+    //   this.localStorage.isLoggedIn = true
+    // }
+    // this.setState({ isLoggedIn: true })
+    // let bool = localStorage.loggedIn.
   }
 
   addApplication = (data) => {
@@ -151,12 +141,19 @@ export default class App extends React.Component {
     }
   }
 
+  logOut = () => {
+    localStorage.clear()
+    this.setState({ user: {}, 
+      isLoggedIn: false,
+      applications: [] })
+  }
+
   render(){
     return (
       <div className="App">
-        <Nav />
+        <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
         <Switch>
-        <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}/>}/>
+        <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/profile" render={() => <ProfileContainer 
@@ -164,9 +161,7 @@ export default class App extends React.Component {
           applications={this.state.applications}
           deleteAppFromState={this.deleteAppFromState}
         />}/>
-        {/* <Login /> */}
-        {/* <User />
-        <Company /> */}
+        {/* <Company /> */}
         <Route path="/jobs" render={() => <JobContainer 
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}
@@ -176,7 +171,7 @@ export default class App extends React.Component {
           }/>
         {/* <ApplicationContainer applications={this.state.applications}/> */}
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
