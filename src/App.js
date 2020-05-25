@@ -4,6 +4,7 @@ import Home from './components/Home'
 import About from './components/About';
 import Footer from "./components/Footer"
 import ProfileContainer from './containers/ProfileContainer'
+import CompanyContainer from "./containers/CompanyContainer"
 import LoginForm from './components/LoginForm';
 import CompanyLoginForm from './components/CompanyLoginForm';
 import NewUserForm from './components/NewUserForm'
@@ -87,8 +88,7 @@ export default class App extends React.Component {
 
   updateCurrentCompany = (c) => {
     this.setState({company: c})
-        // fetch("http://localhost:3000/users/1")
-        fetch(`http://localhost:3000/users/${this.state.company.id}`)
+        fetch(`http://localhost:3000/companies/${this.state.company.id}`)
         .then(resp => resp.json())
         .then(data => {
           //localStorage.clear()
@@ -210,7 +210,7 @@ export default class App extends React.Component {
         <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
         <Switch>
         <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
-        <Route exact path="/login-company" render={ () => <CompanyLoginForm />} />
+        <Route exact path="/login-company" render={ () => <CompanyLoginForm updateCurrentCompany={this.updateCurrentCompany}/>} />
         <Route exact path="/sign-up" render={() => <NewUserForm signUpUser={this.signUpUser} createNewUser={this.createNewUser}/>}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
@@ -219,7 +219,7 @@ export default class App extends React.Component {
           applications={this.state.applications}
           deleteAppFromState={this.deleteAppFromState}
         />}/>
-        {/* <Company /> */}
+        <Route exact path="/company-profile" render={() => <CompanyContainer />}/>
         <Route path="/jobs" render={() => <JobContainer 
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}

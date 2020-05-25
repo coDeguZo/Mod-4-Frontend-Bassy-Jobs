@@ -10,34 +10,36 @@ class CompanyLoginForm extends React.Component {
       password: ""
     };
   
-    // handleChange = (e, { name, value }) => {
-    //   this.setState({ [name]: value });
-    //   console.log(this.state)
-    // };
+    handleChange = (e, { name, value }) => {
+      this.setState({ [name]: value });
+      console.log(this.state)
+    };
   
-    // //When form is submitted, make a fetch to "log in the user"
-    // handleLoginSubmit = () => {
-    //   console.log("attempting to log in")
-    //   fetch("http://localhost:3000/employer-login", {
-    //     method:"POST",
-    //     headers: {
-    //       "Content-Type" : "application/json",
-    //       "Accept" : "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       email: this.state.email,
-    //       password: this.state.password
-    //     })
-    //   }).then(res => res.json())
-    //   .then(companyData => {
-    //     console.log("response from the server", companyData)
-    //     if(companyData.error_message){
-    //       alert(companyData.error_message)
-    //     }else{
-    //       this.props.updateCurrentUser(companyData)
-    //     }
-    //   })
-    // };
+    //When form is submitted, make a fetch to "log in the user"
+    handleLoginSubmit = () => {
+      console.log("attempting to log in")
+      fetch("http://localhost:3000/employer-login", {
+        method:"POST",
+        headers: {
+          "Content-Type" : "application/json",
+          "Accept" : "application/json"
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        })
+      }).then(res => res.json())
+      .then(companyData => {
+        //   debugger
+        console.log("response from the server", companyData)
+        if(companyData.error_message){
+          alert(companyData.error_message)
+        }else{
+          this.props.updateCurrentCompany(companyData)
+         // console.log(companyData)
+        }
+      })
+    };
   
     render() {
       return (
@@ -73,9 +75,9 @@ class CompanyLoginForm extends React.Component {
                 value={this.state.password}
               />
             </Form.Group>
-            <Link to ={"/employer-profile"}>
-              {/* <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button> */}
-              <Button type="submit" onClick={null}>Login</Button>
+            <Link to ={"/company-profile"}>
+              <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
+              {/* <Button type="submit" onClick={null}>Login</Button> */}
             </Link>
           </Form>
           <p>Don't have an account? 

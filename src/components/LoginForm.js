@@ -43,7 +43,10 @@ class LoginForm extends React.Component {
   
     render() {
       return (
+        <div>
         <Segment>
+          <br/>
+          <h1> User Login Form </h1>
           <Form
             // onSubmit={this.handleLoginSubmit}
             size="mini"
@@ -80,6 +83,7 @@ class LoginForm extends React.Component {
               <Link to="/sign-up"> Sign up here</Link>
           </p>
         </Segment>
+        </div>
       );
     }
   }
