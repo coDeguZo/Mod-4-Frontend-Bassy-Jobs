@@ -4,7 +4,7 @@ import Home from './components/Home'
 import About from './components/About';
 import Footer from "./components/Footer"
 import ProfileContainer from './containers/ProfileContainer'
-// import Login from './components/Login';
+import LoginForm from './components/LoginForm';
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
@@ -24,6 +24,23 @@ export default class App extends React.Component {
   }
 
   // localStorage["user"] = this.state.user.name
+  updateCurrentUser = (u) => {
+    debugger
+    this.setState({user: u})
+        // fetch("http://localhost:3000/users/1")
+        fetch(`http://localhost:3000/users/${this.state.user.id}`)
+        .then(resp => resp.json())
+        .then(data => {
+          //localStorage.clear()
+          localStorage["id"] = JSON.stringify(data.id)
+          localStorage["name"] = data.name
+          localStorage["address"] = data.address
+          localStorage["email"] = data.email
+          localStorage["phone_number"] = data.phone_number
+          return this.setState({ user: data })
+    })
+    debugger
+  }
 
   componentDidMount() {
     fetch("http://localhost:3000/job_listings")
@@ -32,18 +49,6 @@ export default class App extends React.Component {
       jobListings: data,
       masterJobListings: data
     }))
-
-    fetch("http://localhost:3000/users/13")
-    .then(resp => resp.json())
-    .then(data => {
-      //localStorage.clear()
-      localStorage["id"] = JSON.stringify(data.id)
-      localStorage["name"] = data.name
-      localStorage["address"] = data.address
-      localStorage["email"] = data.email
-      localStorage["phone_number"] = data.phone_number
-      return this.setState({ user: data })
-    })
 
     fetch(`http://localhost:3000/apps`)
         .then(resp => resp.json())
@@ -103,8 +108,6 @@ export default class App extends React.Component {
   sortJobListingsByEdLevel = (event) => {
     console.log("EDU", event.target.innerText)
     const edLevel = event.target.innerText
-    // let sortedByEd = ''
-    // we need some sort of sorting logic here to deal with how our seed data looks. maybe .replace a bunch of times?
 
     if(edLevel === 'All' || edLevel === ''){
       this.setState({jobListings: this.state.masterJobListings})
@@ -121,6 +124,7 @@ export default class App extends React.Component {
       <div className="App">
         <Nav />
         <Switch>
+        <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}/>}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>
         <Route exact path="/profile" render={() => <ProfileContainer 

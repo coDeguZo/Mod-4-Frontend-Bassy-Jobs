@@ -40,6 +40,10 @@ class Nav extends React.Component {
             <Link to="/profile">Profile</Link>
                 {/* Login/Profile */}
             </div>
+            <div className="item">
+            <Link to="/Login">Log In</Link>
+                {/* Login/Profile */}
+            </div>
             </div>
         </div>
     //     const getWidth = () => {
