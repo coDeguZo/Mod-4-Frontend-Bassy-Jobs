@@ -22,15 +22,14 @@ export default class App extends React.Component {
       applications: []
     }
   }
-
   // localStorage["user"] = this.state.user.name
   updateCurrentUser = (u) => {
-    debugger
     this.setState({user: u})
         // fetch("http://localhost:3000/users/1")
         fetch(`http://localhost:3000/users/${this.state.user.id}`)
         .then(resp => resp.json())
         .then(data => {
+          debugger
           //localStorage.clear()
           localStorage["id"] = JSON.stringify(data.id)
           localStorage["name"] = data.name
@@ -39,10 +38,29 @@ export default class App extends React.Component {
           localStorage["phone_number"] = data.phone_number
           return this.setState({ user: data })
     })
-    debugger
+    fetch(`http://localhost:3000/apps`)
+    .then(resp => resp.json())
+    .then(d => {
+        const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+        this.setState({applications: filteredApplications})
+      }
+    )
+    const t = this
+    // debugger
   }
 
+  // storage(){
+  //   this.setState({ user: {
+  //     id: this.localStorage["id"],
+  //     name: this.localStorage["name"],
+  //     address: this.localStorage["address"],
+  //     email: this.localStorage["email"],
+  //     phone_number: this.localStorage["phone_number"]
+  //   } })
+  // }
+
   componentDidMount() {
+    // debugger
     fetch("http://localhost:3000/job_listings")
     .then(resp => resp.json())
     .then(data => this.setState({ 
@@ -50,13 +68,27 @@ export default class App extends React.Component {
       masterJobListings: data
     }))
 
-    fetch(`http://localhost:3000/apps`)
-        .then(resp => resp.json())
-        .then(d => {
-            const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
-            this.setState({applications: filteredApplications})
-          }
-        )
+    let id = parseInt(localStorage.id)
+    // fetch(`http://localhost:3000/users/${this.state.user.id}`)
+    fetch(`http://localhost:3000/users/${id}`)
+    .then(resp => resp.json())
+    .then(data => {
+    //   //localStorage.clear()
+    //   localStorage["id"] = JSON.stringify(data.id)
+    //   localStorage["name"] = data.name
+    //   localStorage["address"] = data.address
+    //   localStorage["email"] = data.email
+    //   localStorage["phone_number"] = data.phone_number
+      return this.setState({ user: data })
+      })
+      
+      fetch(`http://localhost:3000/apps`)
+      .then(resp => resp.json())
+      .then(d => {
+        const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+        this.setState({applications: filteredApplications})
+      }
+    )
   }
 
   addApplication = (data) => {

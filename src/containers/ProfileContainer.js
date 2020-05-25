@@ -59,6 +59,7 @@ class ProfileContainer extends React.Component {
 
     render(){
         // window.location.reload(false)
+        // debugger
         return(
             <div>
             <Grid columns={2} divided>

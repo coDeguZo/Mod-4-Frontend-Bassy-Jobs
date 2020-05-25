@@ -41,7 +41,7 @@ import {Link} from 'react-router-dom'
     
     return (
         <div> 
-            Application Form
+            Application Form What if we included job info here as well? then it could serve as a confirmation page
       <Form >
          <Form.Group widths='equal'>
            <Form.Field
