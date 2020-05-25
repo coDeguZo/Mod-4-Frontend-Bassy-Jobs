@@ -85,23 +85,3 @@ class LoginForm extends React.Component {
   }
   
   export default withRouter(LoginForm);
-
-  // <Switch>
-  //       <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
-  //       <Route exact path="/" component={Home}/>
-  //       <Route exact path="/about" component={About}/>
-  //       <Route exact path="/profile" render={() => <ProfileContainer 
-  //         user={this.state.user} 
-  //         applications={this.state.applications}
-  //         deleteAppFromState={this.deleteAppFromState}
-  //       />}/>
-  //       {/* <Company /> */}
-  //       <Route path="/jobs" render={() => <JobContainer 
-  //         sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
-  //         sortJobListingsBySalary={this.sortJobListingsBySalary}
-  //         sortJobListingsByExp={this.sortJobListingsByExp}
-  //         jobListings={this.state.jobListings} 
-  //         addApplication={this.addApplication}/>
-  //         }/>
-  //       {/* <ApplicationContainer applications={this.state.applications}/> */}
-  //       </Switch>

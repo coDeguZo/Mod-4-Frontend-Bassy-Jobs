@@ -5,6 +5,7 @@ import About from './components/About';
 import Footer from "./components/Footer"
 import ProfileContainer from './containers/ProfileContainer'
 import LoginForm from './components/LoginForm';
+import CompanyLoginForm from './components/CompanyLoginForm';
 import NewUserForm from './components/NewUserForm'
 // import User from './components/User';
 // import Company from './components/Company';
@@ -20,6 +21,7 @@ export default class App extends React.Component {
       masterJobListings: [],
       jobListings: [],
       user: {},
+      company: {},
       applications: [],
       isLoggedIn: localStorage.loggedIn,
       name: "",
@@ -81,12 +83,33 @@ export default class App extends React.Component {
         this.setState({applications: filteredApplications})
       }
     )
-    // if(this.localStorage.isLoggedIn === "true"){
-    //   this.localStorage.isLoggedIn = true
-    // }
-    // this.setState({ isLoggedIn: true })
-    // let bool = localStorage.loggedIn.
   }
+
+  updateCurrentCompany = (c) => {
+    this.setState({company: c})
+        // fetch("http://localhost:3000/users/1")
+        fetch(`http://localhost:3000/users/${this.state.company.id}`)
+        .then(resp => resp.json())
+        .then(data => {
+          //localStorage.clear()
+          localStorage["id"] = JSON.stringify(data.id)
+          localStorage["name"] = data.name
+          localStorage["email"] = data.email
+          localStorage.setItem("loggedIn", JSON.parse('true'))
+          // debugger
+          return this.setState({ company: data })
+    })
+    fetch(`http://localhost:3000/job_listings`)
+    .then(resp => resp.json())
+    .then(d => {
+        const filteredJobListings = d.filter(data => data.company.id === this.state.company.id)
+        this.setState({jobListings: filteredJobListings})
+      }
+    )
+    // debugger
+    this.setState({ isLoggedIn: "true" })
+  }
+
 
   addApplication = (data) => {
     this.setState({applications: [...this.state.applications, data]})
@@ -187,6 +210,7 @@ export default class App extends React.Component {
         <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
         <Switch>
         <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
+        <Route exact path="/login-company" render={ () => <CompanyLoginForm />} />
         <Route exact path="/sign-up" render={() => <NewUserForm signUpUser={this.signUpUser} createNewUser={this.createNewUser}/>}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/about" component={About}/>

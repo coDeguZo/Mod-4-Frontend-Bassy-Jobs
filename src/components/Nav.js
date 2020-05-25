@@ -25,9 +25,9 @@ class Nav extends React.Component {
                     <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content">
-                    <a href="#">Log in</a>
-                    <a href="#">Sign up</a>
-                    <a href="#">Employer</a>
+                    {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
+                    {this.props.isLoggedIn === "true" ?  null : <Link to="/login-company">Log in</Link>}
+                    {/* <a href="#">Employer</a> */}
                     </div>
                 </div>
                 :

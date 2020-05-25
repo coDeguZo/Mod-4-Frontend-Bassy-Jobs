@@ -31,7 +31,8 @@ class NewUserForm extends React.Component {
     render(){
     return (
         <div> 
-            Submit Resume
+        <br/>
+        <h1> Sign Up User Profile </h1>
         <Form onSubmit={() => console.log("submitting")}>
         <Form.Group widths='equal'>
           <Form.Field
