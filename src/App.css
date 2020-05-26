@@ -214,10 +214,10 @@
 .about-page {
   position: relative;
   z-index: 1;
-  height: 1000px;
+  height: 720px;
 }
 
-.about-page .about-page-text-container {
+.about-page .about-us-text-container {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -225,7 +225,37 @@
   left: 0;
   right: 0;
   background: url("https://cdn.tourcms.com/a/11676/848/1/large.jpg") center center;
-  opacity: .4;
+  opacity: .35;
   width: 100%;
   height: 100%;
 }
+
+.about-text {
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 200px;
+}
+
+#twitter-icon {
+  width: 3%;
+}
+
+#instagram-icon {
+  width: 2.8%;
+}
+
+#facebook-icon {
+  width: 3%;
+}
+
+#linkedin-icon {
+  width: 3%;
+}
+
+.about-icon {
+  margin: 20px;
+}
+
+/* #about-blog {
+
+} */
