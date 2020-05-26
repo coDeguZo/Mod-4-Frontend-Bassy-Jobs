@@ -32,14 +32,16 @@ class App extends React.Component {
       email: "",
       address: "",
       phone_number: "",
-      error: true
+      error: true,
+      employer: localStorage.is_employer
     }
   }
   // localStorage["user"] = this.state.user.name
   updateCurrentUser = (u) => {
     this.setState({
       user: u,
-      error: false
+      error: false,
+      employer: "false"
     })
         // fetch("http://localhost:3000/users/1")
         fetch(`http://localhost:3000/users/${this.state.user.id}`)
@@ -52,6 +54,7 @@ class App extends React.Component {
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
           localStorage["is_employer"] = data.is_employer
+          localStorage["error"] = "false"
           // localStorage["password"] = data.password
           localStorage.setItem("loggedIn", JSON.parse('true'))
           return this.setState({ user: data })
@@ -97,7 +100,10 @@ class App extends React.Component {
   }
 
   updateCurrentCompany = (c) => {
-    this.setState({company: c})
+    this.setState({
+      company: c,
+      error: false,
+      employer: "true"})
         fetch(`http://localhost:3000/companies/${this.state.company.id}`)
         .then(resp => resp.json())
         .then(data => {
@@ -107,6 +113,7 @@ class App extends React.Component {
           localStorage["email"] = data.email
           localStorage["is_employer"] = data.is_employer
           localStorage.setItem("loggedIn", JSON.parse('true'))
+          localStorage["error"] = "false"
           return this.setState({ company: data })
     })
     fetch(`http://localhost:3000/job_listings`)
@@ -186,6 +193,7 @@ class App extends React.Component {
       company: {},
       isLoggedIn: false,
       applications: [] })
+    localStorage["error"] = "true"
   }
 
   signUpUser = (event) => {
@@ -220,7 +228,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn}/>
+        <Nav user={this.state.user} logOut={this.logOut} isLoggedIn={this.state.isLoggedIn} employer={this.state.employer}/>
         <Switch>
         <Route exact path="/login" render={ () => <LoginForm updateCurrentUser={this.updateCurrentUser}  />}/>
         <Route exact path="/login-company" render={ () => <CompanyLoginForm updateCurrentCompany={this.updateCurrentCompany}/>} />

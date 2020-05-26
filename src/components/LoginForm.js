@@ -10,7 +10,7 @@ class LoginForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      error: true
+      error: localStorage.error
     };
   }
   
@@ -37,10 +37,10 @@ class LoginForm extends React.Component {
       .then(userData => {
         console.log("response from the server", userData)
         if(userData.error_message){
-          this.setState({ error: true })
+          this.setState({ error: "true" })
           alert(userData.error_message)
         }else{
-          this.setState({ error: false })
+          this.setState({ error: "false" })
           this.props.updateCurrentUser(userData)
           // alert("Welcome To Bassy Jobs!")
         }
@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
     render() {
       return (
         <div>
-          {this.state.error ?
+          {this.state.error === "true" ?
         <Segment>
           <br/>
           <h1> User Login Form </h1>
