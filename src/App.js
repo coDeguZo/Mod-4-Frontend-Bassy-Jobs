@@ -34,6 +34,7 @@ class App extends React.Component {
       email: "",
       address: "",
       phone_number: "",
+      resume: "",
       error: true,
       employer: localStorage.is_employer
     }
@@ -56,6 +57,7 @@ class App extends React.Component {
           localStorage["email"] = data.email
           localStorage["phone_number"] = data.phone_number
           localStorage["is_employer"] = data.is_employer
+          localStorage["resume"] = data.resume
           localStorage["error"] = "false"
           // localStorage["password"] = data.password
           localStorage.setItem("loggedIn", JSON.parse('true'))
@@ -139,8 +141,20 @@ class App extends React.Component {
       }
     )
     this.setState({ isLoggedIn: "true" })
-  }
 
+    fetch(`http://localhost:3000/apps`)
+    .then(resp => resp.json())
+    .then(d => {
+      const filteredApplications = d.filter(data => {
+        if (data.user.id === this.state.user.id && this.state.employer === "false") {
+          return data
+        }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
+          return data
+        }
+      })
+      this.setState({applications: filteredApplications})
+    })
+  }
 
   addApplication = (data) => {
     this.setState({applications: [...this.state.applications, data]})
@@ -226,6 +240,7 @@ class App extends React.Component {
       phone_number: this.state.phone_number,
       // password: this.state.password
       address: this.state.address,
+      resume: this.state.resume
     }
     
     fetch('http://localhost:3000/users', {
@@ -273,10 +288,6 @@ class App extends React.Component {
   //   })
   // };
 
-  errorMsg = () => {
-    alert("no")
-  }
-
   render(){
     return (
       <div className="App">
@@ -307,6 +318,8 @@ class App extends React.Component {
         company={this.state.company}
         jobListings={this.state.currentCompanyJobListings}
         deleteJobListingFromState={this.deleteJobListingFromState}
+        applications={this.state.applications}
+        users={null}
         />}/>
         {this.state.employer === "true" ? null
         :

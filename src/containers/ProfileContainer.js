@@ -13,6 +13,7 @@ class ProfileContainer extends React.Component {
             address: "",
             phone: "",
             email: "",
+            resume: ""
             // password: ""
         }
     }
@@ -43,6 +44,7 @@ class ProfileContainer extends React.Component {
             email: this.state.email,
             phone_number: this.state.phone,
             address: this.state.address,
+            resume: this.state.resume
             // password: this.state.password
         }
         fetch(`http://localhost:3000/users/${id}`, {
@@ -64,7 +66,7 @@ class ProfileContainer extends React.Component {
         // debugger
         return(
             <div>
-            <Grid columns={2} divided>
+              <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column>
                     <div className="profile-info-fixed">
