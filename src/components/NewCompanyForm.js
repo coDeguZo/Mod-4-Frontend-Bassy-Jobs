@@ -13,10 +13,10 @@ class NewCompanyForm extends React.Component {
             <Form.Group widths='equal'>
               <Form.Field
                 control={Input}
-                label='Full Name'
-                placeholder='Full Name'
+                label='Name'
+                placeholder='Name'
                 id="name"
-                onChange={null}
+                onChange={this.props.signUpCompany}
               />
             </Form.Group>
             <Form.Group widths='equal'>
@@ -25,7 +25,7 @@ class NewCompanyForm extends React.Component {
                 label='Email'
                 placeholder='Email'
                 id="email"
-                onChange={null}
+                onChange={this.props.signUpCompany}
               />
             </Form.Group>
             <Form.Group widths='equal'>
@@ -34,25 +34,7 @@ class NewCompanyForm extends React.Component {
                 label='Password'
                 placeholder='Password'
                 id="password"
-                onChange={null}
-              />
-            </Form.Group>
-            <Form.Group widths='equal'>
-                <Form.Field
-                control={Input}
-                label='Address'
-                placeholder='Address'
-                id="address"
-                onChange={null}
-              />
-            </Form.Group>
-            <Form.Group widths='equal'>
-                <Form.Field
-                control={Input}
-                label='Phone Number'
-                placeholder='Phone Number'
-                id="phone_number"
-                onChange={null}
+                onChange={this.props.signUpCompany}
               />
             </Form.Group>
     
@@ -60,8 +42,8 @@ class NewCompanyForm extends React.Component {
               control={Checkbox}
               label='I agree to the Terms and Conditions'
             />
-            <Link to ={"/profile"}>
-              <Button type="submit" onClick={null}>Login</Button>
+            <Link to ={"/employer-profile"}>
+              <Button type="submit" onClick={this.props.createCompany}>Login</Button>
             </Link>
             </Form>
             </div>

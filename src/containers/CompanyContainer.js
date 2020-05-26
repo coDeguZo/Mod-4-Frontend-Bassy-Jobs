@@ -4,6 +4,7 @@ import JobListing from "../components/JobListing"
 import { Grid } from "semantic-ui-react"
 import EditCompanyProfileInformation from "../components/EditCompanyProfileInformation"
 import CompanyApplications from '../components/CompanyApplications'
+import NewCompanyJobListingForm from '../components/NewCompanyJobListingForm'
 
 class CompanyContainer extends React.Component {
     constructor(){
@@ -13,9 +14,15 @@ class CompanyContainer extends React.Component {
             name: "",
             email: "",
             details: false,
+            jobCreate: false,
             selectedApplication: [],
-            filteredApps: []
-            // password: ""
+            filteredApps: [],
+            // password: "",
+            education_level: "",
+            experience_level: "",
+            job_details: '',
+            salary: ""
+
         }
     }
 
@@ -50,12 +57,22 @@ class CompanyContainer extends React.Component {
         this.setState( { [event.target.id]: event.target.value } )
     }
 
+    changeJobDetails = (event) => {
+        console.log(event.target.value)
+        this.setState( { [event.target.id]: event.target.value } )
+    }
+
     editProfileInfo = () => {
         console.log("editing")
         const id = parseInt(localStorage.id)
         const obj = {
             name: this.state.name,
-            email: this.state.email
+            email: this.state.email,
+            details: this.job_details,
+            salary: this.salary,
+            education_level: this.education_level,
+            experience_level: this.experience_level,
+            company_id: id
         }
         fetch(`http://localhost:3000/companies/${id}`, {
             method: "PATCH",
@@ -88,6 +105,34 @@ class CompanyContainer extends React.Component {
         // debugger
     }
 
+    jobCreateStateChange = () => {
+        this.setState({ jobCreate: !this.state.jobCreate })
+    }
+
+    createJobListing = (event) => {
+        let id = parseInt(localStorage.id)
+        const obj = {
+            name: this.state.name,
+            details: this.state.job_details,
+            education_level: this.state.education_level,
+            experience_level: this.state.experience_level,
+            salary: this.state.salary,
+            company_id: id,
+            status: "Open"
+        }
+        // debugger
+    fetch("http://localhost:3000/job_listings", {
+    method: "POST",
+    headers: {"Content-Type": "application/json", "Accept": "application/json"},
+    body: JSON.stringify(obj)
+    }).then(resp => resp.json())
+        this.setState({ jobCreate: false })
+        //  .then(data => {
+        //   this.props.addApplication(data)
+        window.location.reload()
+        // })
+    }
+
     render() {
         return (
             <div> 
@@ -102,6 +147,8 @@ class CompanyContainer extends React.Component {
                     <Grid.Column>
                     <div>
                         <h1>Job Listings</h1>
+                        <button onClick={this.jobCreateStateChange}> Create Job Listing </button>
+                        {this.state.jobCreate === true ? <NewCompanyJobListingForm changeJobDetails={this.changeJobDetails} createJobListing={this.createJobListing}/> : null}
                         {this.props.jobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)}
                     </div>
                     </Grid.Column>

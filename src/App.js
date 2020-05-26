@@ -36,7 +36,7 @@ class App extends React.Component {
       phone_number: "",
       resume: "",
       error: true,
-      employer: localStorage.is_employer
+      employer: localStorage.is_employer,
     }
   }
   // localStorage["user"] = this.state.user.name
@@ -232,6 +232,10 @@ class App extends React.Component {
     console.log(event.target.id)
     this.setState({ [event.target.id]: event.target.value })
   }
+  
+  signUpCompany = (event) => {
+    this.setState({ [event.target.id]: event.target.value }) 
+   }
 
   createNewUser = () => {
     const obj = {
@@ -261,32 +265,22 @@ class App extends React.Component {
         // }})
   }
 
-  // handleLoginSubmit = () => {
-  //   console.log("attempting to log in")
-  //   // fetch("http://localhost:3000/api/v1/login", {
-  //   fetch("http://localhost:3000/login", {
-  //     method:"POST",
-  //     headers: {
-  //       "Content-Type" : "application/json",
-  //       "Accept" : "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       email: this.state.email,
-  //       password: this.state.password
-  //     })
-  //   }).then(res => res.json())
-  //   .then(userData => {
-  //     console.log("response from the server", userData)
-  //     if(userData.error_message){
-  //       this.setState({ error: "true" })
-  //       alert(userData.error_message)
-  //     }else{
-  //       this.setState({ error: "false" })
-  //       this.props.updateCurrentUser(userData)
-  //       // alert("Welcome To Bassy Jobs!")
-  //     }
-  //   })
-  // };
+  createNewCompany = () => {
+    const obj = {
+      name: this.state.name,
+      email: this.state.email,
+    }
+    
+    fetch('http://localhost:3000/companies', {
+      method: "POST",
+      headers: {"Content-Type": "application/json",
+        "Accept": "application/json"},
+      body: JSON.stringify(obj)
+      }).then(resp => resp.json())
+      .then(data => {
+        this.updateCurrentCompany(data)
+      })
+  }
 
   render(){
     return (
@@ -312,7 +306,7 @@ class App extends React.Component {
           deleteAppFromState={this.deleteAppFromState}
         />
         } />
-        <Route exact path="/sign-up-company" render={ () => <NewCompanyForm />}  />
+        <Route exact path="/sign-up-company" render={ () => <NewCompanyForm signUpCompany={this.signUpCompany} createCompany={this.createNewCompany} />} />
         <Route exact path="/redir" render={() => <Redir />}/>
         <Route exact path="/employer-profile" render={() => <CompanyContainer 
         company={this.state.company}
