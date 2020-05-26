@@ -156,7 +156,7 @@ class CompanyContainer extends React.Component {
                     <div>
                         <h3> Users Who Have Applied to Jobs </h3>
                         {this.state.details === true ? 
-                        this.state.filteredApps.map(a => <CompanyApplications a={a} key={a.id} fetchApplication={this.fetchApplication}/>)
+                        this.state.filteredApps.map(a => <CompanyApplications jobListings={this.props.jobListings} company={this.props.company} a={a} key={a.id} fetchApplication={this.fetchApplication}/>)
                         : null}
                     </div>
                     </Grid.Column>
