@@ -1,22 +1,25 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { Button, Form, Segment, Message } from "semantic-ui-react";
-import { Link } from "react-router-dom"
+import { Link, Route, Switch, Redirect} from 'react-router-dom'
 
-const Redir = (props) => {
+// const Redir = (props) => {
+class Redir extends React.Component{
 
-    const func = () => {
-        let sum = 1 + 1
+    func = (num) => {
+        return 1 + num
     }
 
+    render(){
     return(
         <div>
             Redirecting...
             <Link to="/profile">
-              <button onClick={func()}>Login</button>
+              <button onClick={this.func(1)}>button</button>
             </Link>
         </div>
     )
+    }
 }
 
 export default Redir;
