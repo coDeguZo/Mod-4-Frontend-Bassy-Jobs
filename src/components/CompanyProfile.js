@@ -9,6 +9,7 @@ render(){
             <div className="profile-text-info">
                 <h3>Name: {this.props.company.name}</h3>
                 <h3>Email: {this.props.company.email}</h3>
+                <button onClick={this.props.edit}> Edit Information </button>
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import CompanyContainer from "./containers/CompanyContainer"
 import LoginForm from './components/LoginForm';
 import CompanyLoginForm from './components/CompanyLoginForm';
 import NewUserForm from './components/NewUserForm'
+import NewCompanyForm from './components/NewCompanyForm'
 // import User from './components/User';
 // import Company from './components/Company';
 import JobContainer from './containers/JobContainer';
@@ -23,6 +24,7 @@ class App extends React.Component {
     this.state = {
       masterJobListings: [],
       jobListings: [],
+      currentCompanyJobListings: [], 
       user: {},
       company: {},
       applications: [],
@@ -72,10 +74,15 @@ class App extends React.Component {
   componentDidMount() {
     fetch("http://localhost:3000/job_listings")
       .then(resp => resp.json())
-      .then(data => this.setState({ 
-        jobListings: data,
-        masterJobListings: data
-      }))
+      .then(data => { 
+        const filteredJobListings = data.filter(d => d.company.id === this.state.company.id)
+        this.setState({ 
+          currentCompanyJobListings: filteredJobListings,
+          jobListings: data,
+          masterJobListings: data
+        })})
+      this.setState({ isLoggedIn: "true" }
+    )
 
     let id = parseInt(localStorage.id)
     fetch(`http://localhost:3000/users/${id}`)
@@ -138,9 +145,12 @@ class App extends React.Component {
     this.setState({applications: filteredApplications})
   }
 
-  // resetJobListings = () => {
-  //   this.setState({jobListings: this.state.masterJobListings})
-  // }
+  deleteJobListingFromState = (id) => {
+    const filteredJobListings = this.state.JobListings.filter(job => {
+      return job.id !== id
+    })
+    this.setState({jobListings: filteredJobListings})
+  }
 
   sortJobListingsBySalary = (event) => {
     const salaryRangeArr = event.target.innerText.replace("$", "").replace("$", "").replace("+", "").split("-")
@@ -219,7 +229,41 @@ class App extends React.Component {
       .then(data => {
         this.updateCurrentUser(data)
       })
+        // if(data.error_message){
+        //   this.setState({ error: "true" })
+        //   alert(data.error_message)
+        // }else{
+        //   this.setState({ error: "false" })
+        //   this.updateCurrentUser(data)
+        // }})
   }
+
+  // handleLoginSubmit = () => {
+  //   console.log("attempting to log in")
+  //   // fetch("http://localhost:3000/api/v1/login", {
+  //   fetch("http://localhost:3000/login", {
+  //     method:"POST",
+  //     headers: {
+  //       "Content-Type" : "application/json",
+  //       "Accept" : "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       email: this.state.email,
+  //       password: this.state.password
+  //     })
+  //   }).then(res => res.json())
+  //   .then(userData => {
+  //     console.log("response from the server", userData)
+  //     if(userData.error_message){
+  //       this.setState({ error: "true" })
+  //       alert(userData.error_message)
+  //     }else{
+  //       this.setState({ error: "false" })
+  //       this.props.updateCurrentUser(userData)
+  //       // alert("Welcome To Bassy Jobs!")
+  //     }
+  //   })
+  // };
 
   errorMsg = () => {
     alert("no")
@@ -249,16 +293,21 @@ class App extends React.Component {
           deleteAppFromState={this.deleteAppFromState}
         />
         } />
+        <Route exact path="/sign-up-company" render={ () => <NewCompanyForm />}  />
         <Route exact path="/redir" render={() => <Redir />}/>
-        <Route exact path="/employer-profile" render={() => <CompanyContainer company={this.state.company}/>}/>
+        <Route exact path="/employer-profile" render={() => <CompanyContainer 
+        company={this.state.company}
+        jobListings={this.state.currentCompanyJobListings}
+        deleteJobListingFromState={this.deleteJobListingFromState}
+        />}/>
+        {this.state.employer === "true" ? null
+        :
         <Route path="/jobs" render={() => <JobContainer 
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}
           sortJobListingsByExp={this.sortJobListingsByExp}
           jobListings={this.state.jobListings} 
-          addApplication={this.addApplication}/>} />
-          {/* Breaks code and takes us home. */}
-        {/* <Route exact path="/profile" render={() => <Redirect/>}/> */}
+        addApplication={this.addApplication}/>} /> }
         </Switch>
       </div>
     );

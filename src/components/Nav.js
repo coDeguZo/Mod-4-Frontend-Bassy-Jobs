@@ -20,7 +20,7 @@ class Nav extends React.Component {
             <div className="topnav-right">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/jobs">Jobs</Link>
+                {this.props.employer === "false" || this.props.employer === false ? <Link to="/jobs">Jobs</Link> : null }
                 {this.props.isLoggedIn === "true" && this.props.employer === "false" || this.props.employer === false ? <Link to="/profile">Profile</Link> : null}
                 {this.props.isLoggedIn === "true" && this.props.employer === "true" || this.props.employer === true ? <Link to="/employer-profile">Employer Profile</Link> : null}                
                 {/* {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>} */}
@@ -32,9 +32,8 @@ class Nav extends React.Component {
                     <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content">
-                    {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
+                    {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up-company">Sign Up</Link>}
                     {this.props.isLoggedIn === "true" ?  null : <Link to="/login-company">Log in</Link>}
-                    {/* <a href="#">Employer</a> */}
                     </div>
                 </div>
                 :
@@ -46,7 +45,6 @@ class Nav extends React.Component {
                     <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content">
-                        {/* {this.props.isLoggedIn === "true" ? <Link to="/profile">Profile</Link> : null} */}
                         {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
                         {this.props.isLoggedIn === "true" ?  null : <Link to="/login">Log in</Link>}
                     </div>
