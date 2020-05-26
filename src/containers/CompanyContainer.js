@@ -57,7 +57,7 @@ class CompanyContainer extends React.Component {
     render() {
         return (
             <div> 
-            <Grid columns={2} divided>
+            <Grid columns={3} divided>
                 <Grid.Row>
                     <Grid.Column>
                     <div className="profile-info-fixed">
@@ -71,6 +71,11 @@ class CompanyContainer extends React.Component {
                         <h1>Job Listings</h1>
                         {this.props.jobListings.map(j => <JobListing j={j} key={j.id} jobListing={this.jobListing}/>)}
                     </div>
+                    <Grid.Column>
+                        <div>
+                            <h4> Users Who Have Applied to Jobs </h4>
+                        </div>
+                    </Grid.Column>
                 </Grid.Row>
             </Grid>
             </div>

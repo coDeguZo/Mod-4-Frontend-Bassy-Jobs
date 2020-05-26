@@ -64,7 +64,7 @@ class App extends React.Component {
     fetch(`http://localhost:3000/apps`)
     .then(resp => resp.json())
     .then(d => {
-        const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+      const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
         this.setState({applications: filteredApplications})
       }
     )
@@ -85,22 +85,30 @@ class App extends React.Component {
     )
 
     let id = parseInt(localStorage.id)
-    fetch(`http://localhost:3000/users/${id}`)
-      .then(resp => resp.json())
-      .then(data => {
-        return this.setState({ user: data })
-        })
+    if(this.state.employer === "false"){
+      fetch(`http://localhost:3000/users/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+          return this.setState({ user: data })
+      })
+    }else{
+      fetch(`http://localhost:3000/companies/${id}`)
+        .then(resp => resp.json())
+        .then(data => {
+          return this.setState({ company: data })
+      })
+    }
     
-    fetch(`http://localhost:3000/companies/${id}`)
-      .then(resp => resp.json())
-      .then(data => {
-        return this.setState({ company: data })
-    })
-      
     fetch(`http://localhost:3000/apps`)
       .then(resp => resp.json())
       .then(d => {
-        const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+        const filteredApplications = d.filter(data => {
+          if (data.user.id === this.state.user.id && this.state.employer === "false") {
+            return data
+          }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
+            return data
+          }
+        })
         this.setState({applications: filteredApplications})
       }
     )
