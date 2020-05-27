@@ -67,11 +67,11 @@ class CompanyContainer extends React.Component {
         const obj = {
             name: this.state.name,
             email: this.state.email,
-            details: this.job_details,
-            salary: this.salary,
-            education_level: this.education_level,
-            experience_level: this.experience_level,
-            company_id: id
+            // details: this.job_details,
+            // salary: this.salary,
+            // education_level: this.education_level,
+            // experience_level: this.experience_level,
+            // company_id: id
         }
         fetch(`http://localhost:3000/companies/${id}`, {
             method: "PATCH",
@@ -155,11 +155,10 @@ class CompanyContainer extends React.Component {
                         <h1>Job Listings</h1>
                         <button onClick={this.jobCreateStateChange}> Create Job Listing </button>
                         {this.state.jobCreate === true ? <NewCompanyJobListingForm changeJobDetails={this.changeJobDetails} createJobListing={this.createJobListing}/> : null}
-                        {/* {this.props.jobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)} */}
-                        {/* {this.props.company.job_listings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)} */}
-                        {this.props.companyJobListings === undefined || this.props.companyJobListings === [] ? this.props.currentCompanyJobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>) 
-                        : 
-                        this.props.company.job_listings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)}
+                        
+                        {this.props.company.job_listings === undefined ? this.props.currentCompanyJobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)
+                        : this.props.company.job_listings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)}
+
                     </div>
                     </Grid.Column>
                     <Grid.Column>
@@ -173,6 +172,7 @@ class CompanyContainer extends React.Component {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+            <br /><br /> <br /><br /><br /><br /><br /><br /><br/><br /><br /><br /><br/><br /><br /><br/><br />
             </div>
         )
     }

@@ -39,7 +39,7 @@
 
 .image-home {
   height: 500px;
-  width: 1500px;
+  width: 1900px;
 }
 
 .item {
@@ -65,9 +65,9 @@
   padding-left: 30px;
 }
 
-.profile-info-fixed {
+/* .profile-info-fixed {
   position: fixed;
-}
+} */
 
 .edit-profile-info-div {
   padding-left: 50px;

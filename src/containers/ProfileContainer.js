@@ -14,7 +14,6 @@ class ProfileContainer extends React.Component {
             phone: "",
             email: "",
             resume: ""
-            // password: ""
         }
     }
 
@@ -39,13 +38,13 @@ class ProfileContainer extends React.Component {
     editProfileInfo = () => {
         console.log("editing")
         const id = parseInt(localStorage.id)
+
         const obj = {
             name: this.state.name,
             email: this.state.email,
             phone_number: this.state.phone,
             address: this.state.address,
             resume: this.state.resume
-            // password: this.state.password
         }
         fetch(`http://localhost:3000/users/${id}`, {
             method: "PATCH",
@@ -57,6 +56,7 @@ class ProfileContainer extends React.Component {
             this.setState({
                 edit: false
             })
+            // debugger
             window.location.reload()
         })
     }
@@ -71,15 +71,19 @@ class ProfileContainer extends React.Component {
                 <Grid.Row>
                     <Grid.Column>
                     <div className="profile-info-fixed">
-                        Profile Container
                         <Profile user={this.props.user} edit={this.editProfileFormButton}/>
-                        {this.state.edit ? <EditProfileInformation edit={this.editProfileInfo} name={this.state.name} address={this.state.address} phone={this.state.phoneNumber} email={this.state.email} onChangeInformation={this.onChangeInformation} /> : null}
+                        {this.state.edit ? <EditProfileInformation edit={this.editProfileInfo} name={this.state.name} address={this.state.address} phone={this.state.phoneNumber} email={this.state.email} resume={this.state.resume} onChangeInformation={this.onChangeInformation} /> : null}
                     </div>
                     </Grid.Column>
                     <div>
                         <h1>Applications</h1>
-                        {/* {this.props.applications.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication}/>)} */}
-                        {this.props.currentJobListings.map(j => <Application j={j} key={j.id} deleteApplication={this.deleteApplication} companyId={j.company_id}/>)}
+                        {this.props.user.job_listings === undefined ? this.props.applications.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication} currentJobListings={this.props.currentJobListings}/>)
+                        : this.props.user.job_listings.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication} currentJobListings={this.props.currentJobListings}/>)}
+                        {/* {this.props.user.apps.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication} currentJobListings={this.props.currentJobListings}/>)} */}
+                        
+                        
+                        {/* {this.props.currentJobListings.map(j => <Application j={j} key={j.id} deleteApplication={this.deleteApplication} companyId={j.company_id}/>)} */}
+                        <br />
                     </div>
                 </Grid.Row>
             </Grid>

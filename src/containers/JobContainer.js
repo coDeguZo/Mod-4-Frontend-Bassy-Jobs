@@ -93,7 +93,7 @@ export default class JobContainer extends React.Component {
                   <Grid.Column>
                 {
                   this.props.jobListings.map(j => 
-                  <Job j={j} key={j.id} selectedJob={this.state.selectedJob} fetchJob={this.props.fetchJob} fetchJob={this.fetchJob}/>
+                  <Job j={j} key={j.id} selectedJob={this.state.selectedJob} fetchJob={this.fetchJob}/>
                   ) 
                 }   
                   </Grid.Column>
@@ -110,12 +110,13 @@ export default class JobContainer extends React.Component {
             <Route exact path={"/jobs/:id/application-form"} render={(props) => {    
               let id = parseInt(props.match.params.id)
               let job = this.props.jobListings.find(j => j.id === id)
-              // debugger
             return <ApplicationForm
             selectedJob={job} handleSubmit={this.applyForJob}/>}}/>
           {/* </Grid> */}
           </div>
         </Switch>
+        <br /><br />
+
       </div>
       );
     }

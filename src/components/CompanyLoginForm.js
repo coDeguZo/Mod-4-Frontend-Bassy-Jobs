@@ -87,6 +87,7 @@ class CompanyLoginForm extends React.Component {
           <p>Don't have an account? 
               <Link to="/sign-up-company"> Sign Your Company Up Here</Link>
           </p>
+          <br /><br /> <br /><br /><br /><br /><br /><br /><br/><br /><br /><br /><br/><br /><br />
         </Segment>
         : 
         <div> 

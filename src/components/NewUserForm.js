@@ -88,6 +88,7 @@ class NewUserForm extends React.Component {
           <Button type="submit" onClick={this.props.createNewUser}>Login</Button>
         </Link>
         </Form>
+        <br /><br /><br />
         </div>
     )
   }

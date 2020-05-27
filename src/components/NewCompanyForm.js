@@ -46,6 +46,7 @@ class NewCompanyForm extends React.Component {
               <Button type="submit" onClick={this.props.createCompany}>Login</Button>
             </Link>
             </Form>
+            <br /><br /> <br /><br /><br /><br /><br /><br />
             </div>
         )
     }

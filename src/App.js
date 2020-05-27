@@ -55,7 +55,7 @@ class App extends React.Component {
           localStorage["name"] = data.name
           localStorage["address"] = data.address
           localStorage["email"] = data.email
-          localStorage["phone_number"] = data.phone_number
+          // localStorage["phone_number"] = data.phone_number
           localStorage["is_employer"] = data.is_employer
           localStorage["resume"] = data.resume
           localStorage["error"] = "false"
@@ -93,7 +93,8 @@ class App extends React.Component {
       fetch(`http://localhost:3000/users/${id}`)
         .then(resp => resp.json())
         .then(data => {
-          return this.setState({ user: data, applications: data.apps, currentUserJobListings: data.job_listings })
+          return this.setState({ user: data, currentUserJobListings: data.job_listings })
+          // return this.setState({ user: data, applications: data.apps, currentUserJobListings: data.job_listings })
       })
     }else if(this.state.employer === "true"){
       fetch(`http://localhost:3000/companies/${id}`)
@@ -101,8 +102,7 @@ class App extends React.Component {
         .then(data => {
           return this.setState({ 
             company: data, 
-            currentCompanyJobListings: data.job_listings,
-            applications: data.apps})
+            currentCompanyJobListings: data.job_listings})
       })
     }
     
@@ -165,14 +165,29 @@ class App extends React.Component {
   }
 
   addApplication = (data) => {
-    this.setState({applications: [...this.state.applications, data]})
+    // this.setState({user: [...this.state.user.job_listings, data]})
+    debugger
+    this.setState({user: [...this.state.user.apps, data]})
   }
 
+  // applications: [...this.state.applications, data],
+
   deleteAppFromState = (id) => {
-    const filteredApplications = this.state.applications.filter(app => {
+    let filteredApplications
+    if(this.state.applications.length > 0){
+      filteredApplications = this.state.applications.filter(app => {
       return app.id !== id
-    })
+      })
+    } 
+    if(this.state.user.apps.length > 0){
+        filteredApplications = this.state.user.apps.filter(app => {
+        return app.id !== id 
+      })
+    }
     this.setState({applications: filteredApplications})
+    // debugger
+    this.setState({ user: this.state.user, apps: [filteredApplications] } )
+    // window.location.reload()
   }
 
   deleteJobListingFromState = (id) => {
@@ -181,6 +196,7 @@ class App extends React.Component {
     })
     // this.setState({jobListings: filteredJobListings})
     this.setState({currentCompanyJobListings: filteredJobListings})
+    window.location.reload()
   }
 
   sortJobListingsBySalary = (event) => {
@@ -233,8 +249,11 @@ class App extends React.Component {
     this.setState({ user: {}, 
       company: {},
       isLoggedIn: false,
-      applications: [] })
-    localStorage["error"] = "true"
+      applications: [],
+      currentCompanyJobListings: []
+    })
+      localStorage["error"] = "true"
+      // window.location.reload()
   }
 
   signUpUser = (event) => {
@@ -357,6 +376,7 @@ class App extends React.Component {
           addApplication={this.addApplication}
           company={this.state.company}/>} /> }
         </Switch>
+        <Footer />
       </div>
     );
   }
