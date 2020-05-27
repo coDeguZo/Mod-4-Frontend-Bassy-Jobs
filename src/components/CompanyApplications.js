@@ -15,7 +15,11 @@ class CompanyApplications extends React.Component {
     }
 
     filterJobListingId = () => {
-        let jobs = this.props.jobListings.filter(job =>  job.id === this.props.a.job_listing.id)
+        // let jobs = this.props.jobListings.filter(job =>  job.id === this.props.a.job_listing.id)
+        let jobs = this.props.applications.filter(app =>  {
+            // debugger
+            return app.id === this.props.a.id
+        })
         return jobs
     }
 
