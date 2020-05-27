@@ -7,7 +7,7 @@ class Application extends React.Component{
     constructor(){
         super()
         this.state = {
-            appCompanyName: null
+            appCompanyName: ""
         }
     }
 
@@ -15,8 +15,14 @@ class Application extends React.Component{
     fetch('http://localhost:3000/companies')
         .then(resp => resp.json())
         .then(data => {
-            let company = data.filter(company => company.id === this.props.a.job_listing.id)
+            // debugger
+            // before crash:
+            // object that includes company_id: 1
+            // cause of crash:
+            // this.props.a.job_listing === {id: 2, name: "TelePrompter", salary: 100000}
+            let company = data.filter(c => c.id === this.props.a.job_listing.company_id)
             this.setState({ appCompanyName: company[0].name })
+            console.log(this.state.appCompanyName)
         })
     }
         // companyFinder = () => {
@@ -41,7 +47,6 @@ class Application extends React.Component{
                     <h3>Position: {this.props.a.job_listing.name}</h3>
                     <h3>Salary: {this.props.a.job_listing.salary}</h3>
                     {/* <h3>Status: {props.a.status}</h3> */}
-                    {/* <h3>Company Name: {props.a.job_listing.company.name}</h3> */}
                     <h3>Company Name: {this.state.appCompanyName}</h3>
                     <button onClick={() => this.props.deleteApplication(this.props.a.id)}>Delete your application</button>
                 </Card.Content>

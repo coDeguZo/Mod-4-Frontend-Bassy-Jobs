@@ -60,9 +60,17 @@ export default class JobContainer extends React.Component {
       let jnestedObj = {
         id: jl[0].id,
         name: jl[0].name,
-        salary: jl[0].salary
+        salary: jl[0].salary,
+        company_id: jl[0].company.id
       }
+      
+      // let companyId = {
+      //   id: jl[0].company.id
+      // }
+      console.log("jl", jl)
       data.job_listing = jnestedObj
+      console.log("jnestedObj", jnestedObj)
+      // data.company = companyId
       this.props.addApplication(data)
     })
   }
