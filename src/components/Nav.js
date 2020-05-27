@@ -32,8 +32,8 @@ class Nav extends React.Component {
                     <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content">
-                    {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up-company">Sign Up</Link>}
-                    {this.props.isLoggedIn === "true" ?  null : <Link to="/login-company">Log in</Link>}
+                    {this.props.isLoggedIn === "false" || this.props.isLoggedIn === false || this.props.isLoggedIn === undefined  ?  <Link to="/sign-up-company">Sign Up</Link> : null}
+                    {this.props.isLoggedIn === "false" || this.props.isLoggedIn === false || this.props.isLoggedIn === undefined ?  <Link to="/login-company">Log in</Link> : null }
                     </div>
                 </div>
                 :
@@ -45,8 +45,8 @@ class Nav extends React.Component {
                     <i className="fa fa-caret-down"></i>
                     </button>
                     <div className="dropdown-content">
-                        {this.props.isLoggedIn === "true" ?  null : <Link to="/sign-up">Sign Up</Link>}
-                        {this.props.isLoggedIn === "true" ?  null : <Link to="/login">Log in</Link>}
+                        {this.props.isLoggedIn === false || this.propsIsLoggedin === "false" || this.props.isLoggedIn === undefined ?  <Link to="/sign-up">Sign Up</Link> : null}
+                        {this.props.isLoggedIn === false || this.propsIsLoggedin === "false" || this.props.isLoggedIn === undefined ?  <Link to="/login">Log in</Link> : null}
                     </div>
                 </div> 
                 :

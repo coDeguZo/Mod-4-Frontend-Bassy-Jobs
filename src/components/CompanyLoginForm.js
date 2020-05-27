@@ -46,7 +46,7 @@ class CompanyLoginForm extends React.Component {
     render() {
       return (
         <div>
-        {this.state.error === "true" ?
+        {this.state.error === "true" || this.state.error === undefined ?
         <Segment>
         <br/>
         <h1> Company Login Form </h1>

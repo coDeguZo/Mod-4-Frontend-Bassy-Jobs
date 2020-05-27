@@ -16,7 +16,6 @@ import Redir from './components/Redir'
 import './App.css';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
-
 // export default class App extends React.Component {
 class App extends React.Component {
   constructor(){
@@ -83,17 +82,19 @@ class App extends React.Component {
           jobListings: data,
           masterJobListings: data
         })})
-      this.setState({ isLoggedIn: "true" }
-    )
+      // this.setState({ isLoggedIn: "true" })
 
     let id = parseInt(localStorage.id)
-    if(this.state.employer === "false"){
+    if (this.state.employer === undefined){
+      this.setState({ employer: null })
+    }
+    else if(this.state.employer === "false"){
       fetch(`http://localhost:3000/users/${id}`)
         .then(resp => resp.json())
         .then(data => {
           return this.setState({ user: data })
       })
-    }else{
+    }else if(this.state.employer === "true"){
       fetch(`http://localhost:3000/companies/${id}`)
         .then(resp => resp.json())
         .then(data => {
@@ -307,7 +308,7 @@ class App extends React.Component {
         />
         } />
         <Route exact path="/sign-up-company" render={ () => <NewCompanyForm signUpCompany={this.signUpCompany} createCompany={this.createNewCompany} />} />
-        <Route exact path="/redir" render={() => <Redir />}/>
+        {/* <Route exact path="/redir" render={() => <Redir />}/> */}
         <Route exact path="/employer-profile" render={() => <CompanyContainer 
         company={this.state.company}
         jobListings={this.state.currentCompanyJobListings}
@@ -322,7 +323,8 @@ class App extends React.Component {
           sortJobListingsBySalary={this.sortJobListingsBySalary}
           sortJobListingsByExp={this.sortJobListingsByExp}
           jobListings={this.state.jobListings} 
-        addApplication={this.addApplication}/>} /> }
+          addApplication={this.addApplication}
+          company={this.state.company}/>} /> }
         </Switch>
       </div>
     );

@@ -18,7 +18,7 @@ const jobListing = (props) => {
                     <h3>Education level: {props.j.education_level}</h3>
                     <h3>Experience required: {props.j.experience_level}</h3>
                     <h3>Salary: {props.j.salary}</h3>
-                    <h3>Status: {props.j.status}</h3>
+                    {/* <h3>Status: {props.j.status}</h3> */}
                     <button onClick={() => props.deleteJobListing(props.j.id)}>Delete this Job Listing</button>
                 </Card.Content>
             </Card>

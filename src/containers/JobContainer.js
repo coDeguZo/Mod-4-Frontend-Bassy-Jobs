@@ -5,6 +5,7 @@ import ApplicationForm from '../components/ApplicationForm'
 import {Route, Switch} from 'react-router-dom'
 import JobContainerDropdown from '../components/JobContainerDropdown';
 import { Card, Grid } from 'semantic-ui-react'
+import jobListing from '../components/JobListing';
 // import {Router, Route, Switch} from 'react-router-dom'
 
 
@@ -29,24 +30,41 @@ export default class JobContainer extends React.Component {
     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const dateTime = date+' '+time;
-    
+
+    // let jl = this.props.jobListings.filter(job => {
+    //   return job.id === this.state.selectedJob.id
+    // })
+    // debugger
     let obj = {
       application_date: dateTime,
       job_listing_id: this.state.selectedJob.id,
-      status: "pending",
       user_id: parseInt(localStorage.id)
+      // job_listing: {
+      //   name: jl[0].name,
+      //   salary: jl[0].salary
+      // },
+      // company: {
+      //   name: jl[0].company.name
+      // }
     }
-    
     fetch(`http://localhost:3000/apps`, {
       method: "POST",
       headers: {"Content-Type": "application/json",
                 "Accept": "application/json"},
       body: JSON.stringify(obj)
     }).then(resp => resp.json())
-      //  .then(data => {
-      //   this.props.addApplication(data)
-        // window.location()
-      // })
+    .then(data => {
+      let jl = this.props.jobListings.filter(job => {
+        return job.id === this.state.selectedJob.id
+      })
+      let jnestedObj = {
+        id: jl[0].id,
+        name: jl[0].name,
+        salary: jl[0].salary
+      }
+      data.job_listing = jnestedObj
+      this.props.addApplication(data)
+    })
   }
 
   render(){

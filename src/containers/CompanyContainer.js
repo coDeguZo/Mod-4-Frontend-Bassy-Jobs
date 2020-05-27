@@ -118,7 +118,7 @@ class CompanyContainer extends React.Component {
             experience_level: this.state.experience_level,
             salary: this.state.salary,
             company_id: id,
-            status: "Open"
+            // status: "Open"
         }
         // debugger
     fetch("http://localhost:3000/job_listings", {

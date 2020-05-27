@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
     render() {
       return (
         <div>
-          {this.state.error === "true" ?
+          {this.state.error === "true" || this.state.error === undefined ?
         <Segment>
           <br/>
           <h1> User Login Form </h1>
