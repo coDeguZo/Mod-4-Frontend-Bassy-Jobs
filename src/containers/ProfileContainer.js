@@ -64,6 +64,7 @@ class ProfileContainer extends React.Component {
     render(){
         // window.location.reload(false)
         // debugger
+        console.log(this.props)
         return(
             <div>
               <Grid columns={2} divided>
@@ -77,7 +78,8 @@ class ProfileContainer extends React.Component {
                     </Grid.Column>
                     <div>
                         <h1>Applications</h1>
-                        {this.props.applications.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication}/>)}
+                        {/* {this.props.applications.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication}/>)} */}
+                        {this.props.currentJobListings.map(j => <Application j={j} key={j.id} deleteApplication={this.deleteApplication} companyId={j.company_id}/>)}
                     </div>
                 </Grid.Row>
             </Grid>

@@ -21,17 +21,15 @@ class CompanyContainer extends React.Component {
             education_level: "",
             experience_level: "",
             job_details: '',
-            salary: ""
-
+            salary: "",
+            companyJobListings: []
         }
     }
 
     fetchApplication = (id) => {
-        // debugger
         fetch(`http://localhost:3000/apps/${id}`)
         .then(resp => resp.json())
         .then(data => {
-            // debugger
             this.setState({ 
                 selectedApplication: data,
                 details: true
@@ -44,6 +42,7 @@ class CompanyContainer extends React.Component {
             method: "DELETE"
         }).then(resp => resp.json())
         .then(data => {
+            // debugger
             this.props.deleteJobListingFromState(data.id)
         })
     }
@@ -95,14 +94,16 @@ class CompanyContainer extends React.Component {
         fetch('http://localhost:3000/apps/')
         .then(resp => resp.json())
         .then(data => {
+            // debugger
             for(let i = 0; i < data.length; i++){
-                if (data[i].job_listing.id === id){
+                // debugger
+                if (data[i].job_listing_id === id){
+                    // debugger
                     filtered.push(data[i])
                 }
             }
             this.setState({ filteredApps: filtered })
         })
-        // debugger
     }
 
     jobCreateStateChange = () => {
@@ -110,6 +111,7 @@ class CompanyContainer extends React.Component {
     }
 
     createJobListing = (event) => {
+        // debugger
         let id = parseInt(localStorage.id)
         const obj = {
             name: this.state.name,
@@ -120,7 +122,6 @@ class CompanyContainer extends React.Component {
             company_id: id,
             // status: "Open"
         }
-        // debugger
     fetch("http://localhost:3000/job_listings", {
     method: "POST",
     headers: {"Content-Type": "application/json", "Accept": "application/json"},
@@ -133,7 +134,12 @@ class CompanyContainer extends React.Component {
         // })
     }
 
+    componentDidMount(){
+        this.setState({ companyJobListings: this.props.company.job_listings})
+    }
+
     render() {
+        // debugger
         return (
             <div> 
             <Grid columns={3} divided>
@@ -149,14 +155,19 @@ class CompanyContainer extends React.Component {
                         <h1>Job Listings</h1>
                         <button onClick={this.jobCreateStateChange}> Create Job Listing </button>
                         {this.state.jobCreate === true ? <NewCompanyJobListingForm changeJobDetails={this.changeJobDetails} createJobListing={this.createJobListing}/> : null}
-                        {this.props.jobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)}
+                        {/* {this.props.jobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)} */}
+                        {/* {this.props.company.job_listings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id}/>)} */}
+                        {this.props.companyJobListings === [] ? this.props.company.job_listings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)
+                        : 
+                        this.props.currentCompanyJobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)}
                     </div>
                     </Grid.Column>
                     <Grid.Column>
                     <div>
                         <h3> Users Who Have Applied to Jobs </h3>
                         {this.state.details === true ? 
-                        this.state.filteredApps.map(a => <CompanyApplications jobListings={this.props.jobListings} company={this.props.company} a={a} key={a.id} fetchApplication={this.fetchApplication}/>)
+                        // this.state.filteredApps.map(a => <CompanyApplications jobListings={this.props.jobListings} company={this.props.company} a={a} key={a.id} fetchApplication={this.fetchApplication}/>)
+                        this.state.filteredApps.map(a => <CompanyApplications jobListings={this.props.company.job_listings} company={this.props.company} a={a} key={a.id} fetchApplication={this.fetchApplication}/>)
                         : null}
                     </div>
                     </Grid.Column>

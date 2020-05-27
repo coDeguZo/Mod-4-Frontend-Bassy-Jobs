@@ -23,13 +23,14 @@ class App extends React.Component {
     this.state = {
       masterJobListings: [],
       jobListings: [],
-      currentCompanyJobListings: [], 
+      currentCompanyJobListings: [],
+      currentUserJobListings: [],
       user: {},
       company: {},
       applications: [],
       isLoggedIn: localStorage.loggedIn,
       name: "",
-      // password: "",
+      password: "",
       email: "",
       address: "",
       phone_number: "",
@@ -76,9 +77,9 @@ class App extends React.Component {
     fetch("http://localhost:3000/job_listings")
       .then(resp => resp.json())
       .then(data => { 
-        const filteredJobListings = data.filter(d => d.company.id === this.state.company.id)
+        // const filteredJobListings = data.filter(d => d.company.id === this.state.company.id)
         this.setState({ 
-          currentCompanyJobListings: filteredJobListings,
+          // currentCompanyJobListings: filteredJobListings,
           jobListings: data,
           masterJobListings: data
         })})
@@ -92,29 +93,32 @@ class App extends React.Component {
       fetch(`http://localhost:3000/users/${id}`)
         .then(resp => resp.json())
         .then(data => {
-          return this.setState({ user: data })
+          return this.setState({ user: data, applications: data.apps, currentUserJobListings: data.job_listings })
       })
     }else if(this.state.employer === "true"){
       fetch(`http://localhost:3000/companies/${id}`)
         .then(resp => resp.json())
         .then(data => {
-          return this.setState({ company: data })
+          return this.setState({ 
+            company: data, 
+            currentCompanyJobListings: data.job_listings,
+            applications: data.apps})
       })
     }
     
-    fetch(`http://localhost:3000/apps`)
-      .then(resp => resp.json())
-      .then(d => {
-        const filteredApplications = d.filter(data => {
-          if (data.user.id === this.state.user.id && this.state.employer === "false") {
-            return data
-          }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
-            return data
-          }
-        })
-        this.setState({applications: filteredApplications})
-      }
-    )
+    // fetch(`http://localhost:3000/apps`)
+    //   .then(resp => resp.json())
+    //   .then(d => {
+    //     const filteredApplications = d.filter(data => {
+    //       if (data.user.id === this.state.user.id && this.state.employer === "false") {
+    //         return data
+    //       }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
+    //         return data
+    //       }
+    //     })
+    //     this.setState({applications: filteredApplications})
+    //   }
+    // )
   }
 
   updateCurrentCompany = (c) => {
@@ -132,7 +136,10 @@ class App extends React.Component {
           localStorage["is_employer"] = data.is_employer
           localStorage.setItem("loggedIn", JSON.parse('true'))
           localStorage["error"] = "false"
-          return this.setState({ company: data })
+          return this.setState({ 
+            company: data,
+            applications: data.apps
+           })
     })
     fetch(`http://localhost:3000/job_listings`)
     .then(resp => resp.json())
@@ -143,18 +150,18 @@ class App extends React.Component {
     )
     this.setState({ isLoggedIn: "true" })
 
-    fetch(`http://localhost:3000/apps`)
-    .then(resp => resp.json())
-    .then(d => {
-      const filteredApplications = d.filter(data => {
-        if (data.user.id === this.state.user.id && this.state.employer === "false") {
-          return data
-        }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
-          return data
-        }
-      })
-      this.setState({applications: filteredApplications})
-    })
+    // fetch(`http://localhost:3000/apps`)
+    // .then(resp => resp.json())
+    // .then(d => {
+    //   const filteredApplications = d.filter(data => {
+    //     if (data.user.id === this.state.user.id && this.state.employer === "false") {
+    //       return data
+    //     }else if(this.state.employer === "true" && this.state.company.id === data.job_listing.company_id) {
+    //       return data
+    //     }
+    //   })
+      // this.setState({applications: filteredApplications})
+    // })
   }
 
   addApplication = (data) => {
@@ -169,10 +176,11 @@ class App extends React.Component {
   }
 
   deleteJobListingFromState = (id) => {
-    const filteredJobListings = this.state.JobListings.filter(job => {
+    const filteredJobListings = this.state.currentCompanyJobListings.filter(job => {
       return job.id !== id
     })
-    this.setState({jobListings: filteredJobListings})
+    // this.setState({jobListings: filteredJobListings})
+    this.setState({currentCompanyJobListings: filteredJobListings})
   }
 
   sortJobListingsBySalary = (event) => {
@@ -239,13 +247,24 @@ class App extends React.Component {
    }
 
   createNewUser = () => {
+    // const obj = {
+    //   name: this.state.name,
+    //   email: this.state.email,
+    //   phone_number: this.state.phone_number,
+    //   address: this.state.address,
+    //   resume: this.state.resume,
+    //   password: this.state.password
+    // }
+
     const obj = {
-      name: this.state.name,
-      email: this.state.email,
-      phone_number: this.state.phone_number,
-      // password: this.state.password
-      address: this.state.address,
-      resume: this.state.resume
+      user: {
+        name: this.state.name,
+        email: this.state.email,
+        phone_number: this.state.phone_number,
+        address: this.state.address,
+        resume: this.state.resume,
+        password: this.state.password
+      }
     }
     
     fetch('http://localhost:3000/users', {
@@ -267,11 +286,19 @@ class App extends React.Component {
   }
 
   createNewCompany = () => {
+    // const obj = {
+    //   name: this.state.name,
+    //   email: this.state.email,
+    //   password: this.state.password
+    // }
+
     const obj = {
-      name: this.state.name,
-      email: this.state.email,
+      company: {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password
+      }
     }
-    
     fetch('http://localhost:3000/companies', {
       method: "POST",
       headers: {"Content-Type": "application/json",
@@ -280,6 +307,8 @@ class App extends React.Component {
       }).then(resp => resp.json())
       .then(data => {
         this.updateCurrentCompany(data)
+        // debugger
+        // this.updateCurrentCompany(data)
       })
   }
 
@@ -305,13 +334,15 @@ class App extends React.Component {
           user={this.state.user} 
           applications={this.state.applications}
           deleteAppFromState={this.deleteAppFromState}
+          currentJobListings={this.state.currentUserJobListings}
         />
         } />
         <Route exact path="/sign-up-company" render={ () => <NewCompanyForm signUpCompany={this.signUpCompany} createCompany={this.createNewCompany} />} />
         {/* <Route exact path="/redir" render={() => <Redir />}/> */}
         <Route exact path="/employer-profile" render={() => <CompanyContainer 
         company={this.state.company}
-        jobListings={this.state.currentCompanyJobListings}
+        // jobListings={this.state.company}
+        currentCompanyJobListings={this.state.currentCompanyJobListings}
         deleteJobListingFromState={this.deleteJobListingFromState}
         applications={this.state.applications}
         users={null}
