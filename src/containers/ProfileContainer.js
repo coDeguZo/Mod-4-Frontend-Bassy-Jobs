@@ -56,7 +56,7 @@ class ProfileContainer extends React.Component {
                  }
             }
         }
-        if (this.state.name.length === 0 && this.state.address.length === 0 && this.state.phone.length === 0 && this.state.email.length === 0 && this.state.resume.length === 0){
+        if (this.state.name.length === 0 || this.state.address.length === 0 || this.state.phone.length === 0 || this.state.email.length === 0 || this.state.resume.length === 0){
             alert("All entries must be filled")
         }
         else {

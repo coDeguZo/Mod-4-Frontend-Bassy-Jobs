@@ -77,7 +77,7 @@ import {Link} from 'react-router-dom'
           control={TextArea}
           label='Resume'
           placeholder='Tell us more about you...'
-          className="textarea-application-form height"
+          className="textarea-application-form"
           value={props.user.resume}
         />
         <Form.Field
