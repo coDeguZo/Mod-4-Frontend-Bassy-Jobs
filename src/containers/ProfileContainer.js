@@ -2,7 +2,7 @@ import React from "react"
 import Profile from "../components/Profile"
 import Application from "../components/Application"
 import EditProfileInformation from "../components/EditProfileInformation"
-import { Grid } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 
 class ProfileContainer extends React.Component {
     constructor(){

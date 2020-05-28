@@ -4,7 +4,8 @@ const Home = (props) => {
     return (
         <div> 
             {/* HOME */}
-            <img className="image-home" alt="home picture" src="https://cdn.tourcms.com/a/11676/848/1/large.jpg"></img>
+            {/* <img className="image-home" alt="home picture" src="https://cdn.tourcms.com/a/11676/848/1/large.jpg"></img> */}
+            <img className="image-home" alt="home picture" src="../images/home3.jpeg"></img>
             <h1> How Bassy Jobs Works</h1>
             <div className="ui three column grid">
                 <div className="column">

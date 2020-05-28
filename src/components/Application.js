@@ -7,7 +7,7 @@ class Application extends React.Component{
     constructor(){
         super()
         this.state = {
-            appCompanyName: this.fetchCompanyName,
+            appCompanyName: "",
             id: this.fetchApplicationId()
         }
     }
@@ -73,11 +73,28 @@ class Application extends React.Component{
         })
     }
 
-    fetchCompanyName = () => {
+    // fetchCompanyName = () => {
+    //     debugger
+    //     fetch('http://localhost:3000/companies')
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         debugger
+    //         let company
+    //         // if(this.props.a.company_id === undefined){
+    //             // debugger
+    //             company = data.filter(c => c.id === this.props.a.company_id)
+    //             return this.setState({ appCompanyName: company[0].name })
+    //         // }else
+    //         //     company = data.filter(c => c.id === this.props.a.company_id)
+    //     })
+    // }
+
+    componentDidMount(){
+        // debugger
         fetch('http://localhost:3000/companies')
         .then(resp => resp.json())
         .then(data => {
-
+            // debugger
             let company
             // if(this.props.a.company_id === undefined){
                 // debugger
@@ -103,7 +120,7 @@ class Application extends React.Component{
                     <h3>Salary: {this.props.a.salary}</h3>
                     {/* <h3>Status: {this.props.j.status}</h3> */}
                     <h3>Status: {this.props.a.status}</h3>
-                    {/* <h3>Company Name: {this.state.appCompanyName}</h3> */}
+                    <h3>Company Name: {this.state.appCompanyName}</h3>
                     {/* <h3>Company Name: {this.state.appCompanyName}</h3> */}
                     <button onClick={() => this.props.deleteApplication(this.state.id, this.props.a.id)}>Delete your application</button>
                     {/* <button onClick={() => this.props.deleteApplication(this.state.id)}>Delete your application</button> */}

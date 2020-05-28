@@ -1,7 +1,7 @@
 import React from "react"
 import CompanyProfile from "../components/CompanyProfile"
 import JobListing from "../components/JobListing"
-import { Grid } from "semantic-ui-react"
+import { Grid, Segment } from "semantic-ui-react"
 import EditCompanyProfileInformation from "../components/EditCompanyProfileInformation"
 import CompanyApplications from '../components/CompanyApplications'
 import NewCompanyJobListingForm from '../components/NewCompanyJobListingForm'
@@ -142,16 +142,15 @@ class CompanyContainer extends React.Component {
         // debugger
         return (
             <div> 
-            <Grid columns={3} divided>
+            <Grid columns={2} divided>
                 <Grid.Row>
                     <Grid.Column>
                     <div className="profile-info-fixed">
                         <CompanyProfile company={this.props.company} edit={this.editProfileFormButton}/>
                         {this.state.edit ? <EditCompanyProfileInformation edit={this.editProfileInfo} name={this.state.name} address={this.state.address} phone={this.state.phoneNumber} email={this.state.email} onChangeInformation={this.onChangeInformation} /> : null}
                     </div>
-                    </Grid.Column>
-                    <Grid.Column>
-                    <div>
+                    <br /><br /><br />
+                    <div className={"company-profile"}>
                         <h1>Job Listings</h1>
                         <button onClick={this.jobCreateStateChange}> Create Job Listing </button>
                         {this.state.jobCreate === true ? <NewCompanyJobListingForm changeJobDetails={this.changeJobDetails} createJobListing={this.createJobListing}/> : null}

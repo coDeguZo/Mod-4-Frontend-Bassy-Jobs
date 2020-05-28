@@ -11,12 +11,13 @@ const Profile = (props) => {
                 <h3>Address: {props.user.address}</h3>
                 <h3>Phone: {props.user.phone_number}</h3>
                 <h3>Email: {props.user.email}</h3>
-                <div className="ui card">
-                <div className="content">
+                 {/* <div className="ui card"> */}
+                <div>
                 <h3>Resume: </h3>
-                    <textarea value={props.user.resume}></textarea>
+                    <textarea className="width" value={props.user.resume}></textarea>
                 </div>
-                </div>
+                {/* </div> */}
+                <br />
                 <button onClick={props.edit}> Edit Information </button>
             </div>
         </div>
