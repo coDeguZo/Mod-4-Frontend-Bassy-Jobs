@@ -398,6 +398,7 @@ class App extends React.Component {
         {this.state.employer === "true" ? null
         :
         <Route path="/jobs" render={() => <JobContainer 
+          user={this.state.user}
           searchBar={this.searchBar}
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}

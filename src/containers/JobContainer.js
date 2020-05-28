@@ -113,6 +113,7 @@ export default class JobContainer extends React.Component {
               let id = parseInt(props.match.params.id)
               let job = this.props.jobListings.find(j => j.id === id)
             return <ApplicationForm
+            user={this.props.user}
             selectedJob={job} handleSubmit={this.applyForJob}/>}}/>
           {/* </Grid> */}
           </div>

@@ -75,9 +75,10 @@ import {Link} from 'react-router-dom'
       
         <Form.Field
           control={TextArea}
-          label='Work Experience'
+          label='Resume'
           placeholder='Tell us more about you...'
-          className="textarea-application-form"
+          className="textarea-application-form height"
+          value={props.user.resume}
         />
         <Form.Field
           control={Checkbox}
