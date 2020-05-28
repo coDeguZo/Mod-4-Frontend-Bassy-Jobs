@@ -2,7 +2,7 @@ import React from "react"
 import { Form, Card } from "semantic-ui-react"
 
 const Profile = (props) => {
-    console.log(props)
+    // console.log(props)
     return(
         <div>
             <h1>Profile Information</h1>
@@ -14,7 +14,7 @@ const Profile = (props) => {
                  {/* <div className="ui card"> */}
                 <div>
                 <h3>Resume: </h3>
-                    <textarea className="width" value={props.user.resume}></textarea>
+                    <textarea className="height" value={props.user.resume}></textarea>
                 </div>
                 {/* </div> */}
                 <br />

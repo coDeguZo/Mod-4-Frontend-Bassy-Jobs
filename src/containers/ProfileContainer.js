@@ -32,26 +32,39 @@ class ProfileContainer extends React.Component {
     }
 
     onChangeInformation = (event) => {
-        console.log(event.target.value)
+        console.log("event", event.target.value)
         this.setState( { [event.target.id]: event.target.value } )
     }
 
     editProfileInfo = () => {
         console.log("editing")
         const id = parseInt(localStorage.id)
-
-        const obj = {
+        let rawObj = {
             name: this.state.name,
             email: this.state.email,
             phone_number: this.state.phone,
             address: this.state.address,
             resume: this.state.resume
         }
+
+        let newObj = Object.values(rawObj)
+        for(let i = 0; i < newObj.length; i++){
+            if(newObj[i] === ""){
+                let index = newObj.indexOf(i);
+                if (index > -1) {
+                    newObj.splice(index, 1);
+                 }
+            }
+        }
+        if (this.state.name.length === 0 && this.state.address.length === 0 && this.state.phone.length === 0 && this.state.email.length === 0 && this.state.resume.length === 0){
+            alert("All entries must be filled")
+        }
+        else {
         fetch(`http://localhost:3000/users/${id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json",
                     "Accept" : "application/json"},
-            body: JSON.stringify(obj)
+            body: JSON.stringify(rawObj)
         }).then(resp => resp.json())
         .then(data => {
             this.setState({
@@ -59,11 +72,12 @@ class ProfileContainer extends React.Component {
             })
             window.location.reload()
         })
+        }
     }
 
     render(){
         // window.location.reload(false)
-        console.log("profile container props", this.props)
+        // console.log("profile container props", this.props)
         // joblisting id = 6, app id = 20
         // debugger
         return(

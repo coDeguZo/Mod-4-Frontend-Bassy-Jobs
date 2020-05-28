@@ -94,7 +94,7 @@ class CompanyLoginForm extends React.Component {
         <div> 
           {/* fake home page. P.S. I'm perfectly happy to remove the below h1 tags at this point. Or we can style this page. */}
           <h1>You have successfully logged in</h1> 
-            <img className="image-home" alt="home picture" src="https://cdn.tourcms.com/a/11676/848/1/large.jpg"></img>
+            <img className="image-home" alt="home picture" src="../images/home3.jpeg"></img>
             <h1> How Bassy Jobs Works</h1>
             <div className="ui three column grid">
                 <div className="column">

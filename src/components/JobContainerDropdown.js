@@ -1,6 +1,6 @@
 // import React, { Fragment } from 'react'
 import React from 'react'
-import { Dropdown, Grid, Segment } from 'semantic-ui-react'
+import { Dropdown, Grid, Segment, Search } from 'semantic-ui-react'
 
 const bySalary = [
   { key: 1, text: 'All', value: 1 },
@@ -27,7 +27,7 @@ const byExperienceLevel = [
 
 const jobContainerDropdown = (props) => (
     <div className="align-right">
-        <Grid columns={3}>
+        <Grid columns={4}>
             <Grid.Row>
                 <Grid.Column>
                     <p>Sort by salary</p>
@@ -53,6 +53,18 @@ const jobContainerDropdown = (props) => (
                     placeholder={"sort by experience level"}
                     options={byExperienceLevel} selection 
                     onChange={(event) => props.sortJobListingsByExp(event)}/>
+                 </Grid.Column>
+                 <Grid.Column >
+                 {/* <Search  
+                    className={"search-by-name"}
+                    onSearchChange={(event) => props.searchBar(event)}
+                    results={null}
+                    /> */}
+                    {/* <input type="text" className={"search-by-name"} placeholder="Search.." name="search" onChange={(event) => props.searchBar(event)}></input> */}
+                        <p className={"search-by-names"}>Search Job</p>
+                    <div class="wrapper">
+                        <input class="search" placeholder="Search" type="text" name="search" onChange={(event) => props.searchBar(event)}></input>
+                    </div>
                  </Grid.Column>
             </Grid.Row>
         </Grid>

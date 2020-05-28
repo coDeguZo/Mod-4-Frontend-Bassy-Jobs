@@ -73,6 +73,10 @@ class CompanyContainer extends React.Component {
             // experience_level: this.experience_level,
             // company_id: id
         }
+        if (this.state.name.length === 0 && this.state.email.length === 0){
+            alert("All entries must be filled")
+        }
+        else {
         fetch(`http://localhost:3000/companies/${id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json",
@@ -85,6 +89,7 @@ class CompanyContainer extends React.Component {
             })
             window.location.reload()
         })
+    }
     }
 
     jobListingApps = (id) => {
@@ -153,6 +158,7 @@ class CompanyContainer extends React.Component {
                     <div className={"company-profile"}>
                         <h1>Job Listings</h1>
                         <button onClick={this.jobCreateStateChange}> Create Job Listing </button>
+                        <br /><br />
                         {this.state.jobCreate === true ? <NewCompanyJobListingForm changeJobDetails={this.changeJobDetails} createJobListing={this.createJobListing}/> : null}
                         
                         {this.props.company.job_listings === undefined ? this.props.currentCompanyJobListings.map(j => <JobListing jobListingApps={this.jobListingApps} j={j} key={j.id} deleteJobListing={this.deleteJobListing}/>)

@@ -83,6 +83,7 @@ export default class JobContainer extends React.Component {
           <Route exact path={"/jobs"} render={ () => 
              <div className="job-container">
                <JobContainerDropdown 
+                searchBar={this.props.searchBar}
                 sortJobListingsByEdLevel={this.props.sortJobListingsByEdLevel}
                 sortJobListingBySalary={this.props.sortJobListingsBySalary} 
                 sortJobListingsByExp={this.props.sortJobListingsByExp}

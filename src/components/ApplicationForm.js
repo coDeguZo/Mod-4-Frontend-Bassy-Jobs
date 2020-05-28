@@ -9,6 +9,10 @@ import {
     Radio,
     Select,
     TextArea,
+    Segment,
+    Grid,
+    Header,
+    Image
   } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
@@ -41,44 +45,49 @@ import {Link} from 'react-router-dom'
     
     return (
         <div> 
-            Application Form
+            <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 900 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              Application Form
+            </Header>
       <Form >
-         <Form.Group widths='equal'>
+         <Segment stacked>
            <Form.Field
             control={Input}
             label='Full Name'
             value={localStorage.name}
             placeholder='Full Name'
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
+       
            <Form.Field
             control={Input}
             value={localStorage.email}
             label='Email'
             placeholder='Email'
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
+    
             <Form.Field
             control={Input}
             value={localStorage.address}
             label='Address'
             placeholder='Address'
           />
-        </Form.Group>
+      
         <Form.Field
           control={TextArea}
           label='Work Experience'
           placeholder='Tell us more about you...'
+          className="textarea-application-form"
         />
         <Form.Field
           control={Checkbox}
           label='I agree to the Terms and Conditions'
         />
        <Link to="/profile"><Form.Field onClick={() => (props.handleSubmit())} control={Button}>Submit</Form.Field></Link> 
-
+       </Segment>
         </Form>
+        </Grid.Column>
+      </Grid>
         </div>
     )
 }

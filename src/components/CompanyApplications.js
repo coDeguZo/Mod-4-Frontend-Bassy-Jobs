@@ -34,7 +34,7 @@ class CompanyApplications extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        console.log("AAAAAAAAAAAAAAA", this.props)
         return (
             <div>
                 <Card fluid className="job-card">

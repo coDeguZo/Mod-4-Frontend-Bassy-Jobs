@@ -262,6 +262,18 @@ class App extends React.Component {
     }
   }
 
+  searchBar = (event) => {
+    this.filteredByName(event)
+  }
+
+  filteredByName = (event) => {
+    let filtered = this.state.masterJobListings.filter(job => {
+      let text = event.target.value
+      let str = text.replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase());
+      return job.name.substring(0, event.target.value.length) === str})
+    this.setState({jobListings: filtered})
+  }
+
   logOut = () => {
     localStorage.clear()
     this.setState({ user: {}, 
@@ -386,6 +398,7 @@ class App extends React.Component {
         {this.state.employer === "true" ? null
         :
         <Route path="/jobs" render={() => <JobContainer 
+          searchBar={this.searchBar}
           sortJobListingsByEdLevel={this.sortJobListingsByEdLevel}
           sortJobListingsBySalary={this.sortJobListingsBySalary}
           sortJobListingsByExp={this.sortJobListingsByExp}

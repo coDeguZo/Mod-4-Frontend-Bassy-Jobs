@@ -1,6 +1,6 @@
 import React from "react"
 import { useHistory, Link } from "react-router-dom"
-import { Button, Card, Segment } from 'semantic-ui-react'
+import { Button, Card, Segment, Search } from 'semantic-ui-react'
 
 const JobDetails = (props) => {
     // console.log("Selected Job:", props.selectedJob)
@@ -26,10 +26,9 @@ const JobDetails = (props) => {
 //   </Link>
 
     return (
-        <div> 
+        <div>
             <Segment style={{overflow: 'auto', maxHeight: 500 }}>
             <Card fluid className="job-details-card">
-                {props.selectedJob.name}
                 <h1>{props.selectedJob.name}</h1>
                 <h3>Experience Level: {props.selectedJob.experience_level}</h3>
                 <h3>Education Required: {props.selectedJob.education_level}</h3>

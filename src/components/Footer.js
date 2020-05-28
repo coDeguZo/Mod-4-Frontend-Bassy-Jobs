@@ -5,7 +5,7 @@ class Footer extends React.Component {
 
     render() {
         return (
-        <div>
+        <div className="footer">
             <Segment inverted vertical style={{ padding: '1em 0em' }}>
                 <Container>
                     <Grid divided inverted stackable>

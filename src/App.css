@@ -289,7 +289,42 @@
   padding-left: 70px;
 }
 
-.width {
+.height {
   width: 600px;
-  height: 500px;
+  height: 300px;
+}
+
+.job-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* .search-by-name {
+  padding-left: 10px;
+} */
+
+/* .search-by-names {
+  padding-left: 10px;
+} */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  min-width: 100px;
+}
+
+.search {
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 37px;
+  /* width: 100%; */
+  width: 190px;
+  padding: 2px 23px 2px 30px;
+  outline: 0;
+  /* background-color: #f5f5f5; */
+}
+
+.search:hover, .search:focus {
+  border: 1.5px solid #009688;
+  background-color: white;
 }
