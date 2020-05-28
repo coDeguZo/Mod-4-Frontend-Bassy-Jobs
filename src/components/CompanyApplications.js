@@ -47,6 +47,9 @@ class CompanyApplications extends React.Component {
                             <h3>Email of applicant: {this.props.a.user.email}</h3>
                             <h3>Phone number of applicant: {this.props.a.user.phone_number}</h3>
                             <h3>Address of applicant: {this.props.a.user.address}</h3>
+                            <h3>Resume: </h3>
+                            <textarea className="height">{this.props.a.user.resume}</textarea>
+                            <br></br><br></br>
                             <select onChange={this.handleSelectChange}>
                                 <option id="pending" value="pending">Pending</option>
                                 <option id="accepted" value="accepted">Accepted</option>
