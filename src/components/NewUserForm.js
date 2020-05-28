@@ -10,6 +10,10 @@ import {
     Radio,
     Select,
     TextArea,
+    Segment,
+    Grid,
+    Header,
+    Image
   } from 'semantic-ui-react'
 
 class NewUserForm extends React.Component {
@@ -30,11 +34,14 @@ class NewUserForm extends React.Component {
   
     render(){
     return (
-        <div> 
-        <br/>
-        <h1> Sign Up User Profile </h1>
+        <div className="user-signup"> 
+        <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle' >
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='teal' textAlign='center'>
+          <Image src='https://react.semantic-ui.com/logo.png' /> Sign Up Your As New User!
+        </Header>
         <Form onSubmit={() => console.log("submitting")}>
-        <Form.Group widths='equal'>
+          <Segment stacked>
           <Form.Field
             control={Input}
             label='Full Name'
@@ -42,8 +49,6 @@ class NewUserForm extends React.Component {
             id="name"
             onChange={this.props.signUpUser}
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
            <Form.Field
             control={Input}
             label='Email'
@@ -51,8 +56,6 @@ class NewUserForm extends React.Component {
             id="email"
             onChange={this.props.signUpUser}
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
            <Form.Field
             control={Input}
             label='Password'
@@ -60,8 +63,6 @@ class NewUserForm extends React.Component {
             id="password"
             onChange={this.props.signUpUser}
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
             <Form.Field
             control={Input}
             label='Address'
@@ -69,8 +70,6 @@ class NewUserForm extends React.Component {
             id="address"
             onChange={this.props.signUpUser}
           />
-        </Form.Group>
-        <Form.Group widths='equal'>
             <Form.Field
             control={Input}
             label='Phone Number'
@@ -78,7 +77,6 @@ class NewUserForm extends React.Component {
             id="phone_number"
             onChange={this.props.signUpUser}
           />
-        </Form.Group>
 
         <Form.Field
           control={Checkbox}
@@ -87,8 +85,10 @@ class NewUserForm extends React.Component {
         <Link to ={"/profile"}>
           <Button type="submit" onClick={this.props.createNewUser}>Login</Button>
         </Link>
+        </Segment>
         </Form>
-        <br /><br /><br />
+        </Grid.Column>
+        </Grid>
         </div>
     )
   }

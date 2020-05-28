@@ -10,7 +10,7 @@ class Footer extends React.Component {
                 <Container>
                     <Grid divided inverted stackable>
                     <Grid.Row>
-                        <Grid.Column width={3}>
+                        <Grid.Column width={5}>
                         <Header inverted as='h4' content='About' />
                         <List link inverted>
                             <List.Item as='a'>Sitemap</List.Item>
@@ -19,7 +19,7 @@ class Footer extends React.Component {
                             <List.Item as='a'>Career Advisors</List.Item>
                         </List>
                         </Grid.Column>
-                        <Grid.Column width={3}>
+                        <Grid.Column width={5}>
                         <Header inverted as='h4' content='Services' />
                         <List link inverted>
                             <List.Item as='a'>Technical Resume Help</List.Item>
@@ -28,7 +28,7 @@ class Footer extends React.Component {
                             <List.Item as='a'>Did We mention Resume Help?</List.Item>
                         </List>
                         </Grid.Column>
-                        <Grid.Column width={7}>
+                        <Grid.Column width={5}>
                         <Header as='h4' inverted>
                             BASSY JOBS
                         </Header>

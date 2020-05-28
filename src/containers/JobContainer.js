@@ -47,6 +47,7 @@ export default class JobContainer extends React.Component {
       //   name: jl[0].company.name
       // }
     }
+    
     fetch(`http://localhost:3000/apps`, {
       method: "POST",
       headers: {"Content-Type": "application/json",
@@ -57,21 +58,21 @@ export default class JobContainer extends React.Component {
       let jl = this.props.jobListings.filter(job => {
         return job.id === this.state.selectedJob.id
       })
+      console.log("jl", jl)
       let jnestedObj = {
         id: jl[0].id,
         name: jl[0].name,
         salary: jl[0].salary,
         company_id: jl[0].company.id
       }
-      
       // let companyId = {
       //   id: jl[0].company.id
       // }
-      console.log("jl", jl)
       data.job_listing = jnestedObj
       console.log("jnestedObj", jnestedObj)
       // data.company = companyId
       this.props.addApplication(data)
+      window.location.reload()
     })
   }
 
@@ -80,7 +81,7 @@ export default class JobContainer extends React.Component {
       <div className="job-container">
         <Switch>
           <Route exact path={"/jobs"} render={ () => 
-             <div>
+             <div className="job-container">
                <JobContainerDropdown 
                 sortJobListingsByEdLevel={this.props.sortJobListingsByEdLevel}
                 sortJobListingBySalary={this.props.sortJobListingsBySalary} 

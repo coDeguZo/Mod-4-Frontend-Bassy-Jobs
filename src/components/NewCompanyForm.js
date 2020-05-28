@@ -1,16 +1,20 @@
 import React from "react"
-import {Form, Input, Checkbox, Button} from "semantic-ui-react"
+import {Form, Input, Checkbox, Button, Grid, Header, Image, Message, Segment} from "semantic-ui-react"
 import {Link} from "react-router-dom"
 
 class NewCompanyForm extends React.Component {
 
     render() {
         return (
-            <div> 
-            <br/>
-            <h1> Sign Up Company </h1>
+        <div className="company-sign-up"> 
+        <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle' >
+      <Grid.Column style={{ maxWidth: 500 }}>
+        <Header as='h2' color='teal' textAlign='center'>
+          <Image src='https://react.semantic-ui.com/logo.png' /> Sign Up Your Company!
+        </Header>
+            {/* <h1> Sign Up Company </h1> */}
             <Form onSubmit={() => console.log("submitting")}>
-            <Form.Group widths='equal'>
+            <Segment stacked>
               <Form.Field
                 control={Input}
                 label='Name'
@@ -18,8 +22,6 @@ class NewCompanyForm extends React.Component {
                 id="name"
                 onChange={this.props.signUpCompany}
               />
-            </Form.Group>
-            <Form.Group widths='equal'>
                <Form.Field
                 control={Input}
                 label='Email'
@@ -27,8 +29,6 @@ class NewCompanyForm extends React.Component {
                 id="email"
                 onChange={this.props.signUpCompany}
               />
-            </Form.Group>
-            <Form.Group widths='equal'>
                <Form.Field
                 control={Input}
                 label='Password'
@@ -36,18 +36,18 @@ class NewCompanyForm extends React.Component {
                 id="password"
                 onChange={this.props.signUpCompany}
               />
-            </Form.Group>
-    
-            <Form.Field
+              <Form.Field
               control={Checkbox}
               label='I agree to the Terms and Conditions'
             />
             <Link to ={"/employer-profile"}>
               <Button type="submit" onClick={this.props.createCompany}>Login</Button>
             </Link>
+            </Segment>
             </Form>
-            <br /><br /> <br /><br /><br /><br /><br /><br />
-            </div>
+          </Grid.Column>
+        </Grid>
+        </div>
         )
     }
 }

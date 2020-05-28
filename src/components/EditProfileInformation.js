@@ -19,7 +19,8 @@ const EditProfileInformation = (props) => {
                     <Form.Input fluid id="email" label='Email' placeholder='Email' value={props.email} onChange={props.onChangeInformation}/>
                 </Form.Group>
                 <Form.Group widths="equal">
-                    <Form.Input fluid id="resume" label='Resume' placeholder='Resume' value={props.resume} onChange={props.onChangeInformation}/>
+                    {/* <Form.Input fluid id="resume" label='Resume' placeholder='Resume' value={props.resume} onChange={props.onChangeInformation}/> */}
+                    <textarea id="resume" label="Resume" placeholder="Resume" value={props.resume} onChange={props.onChangeInformation}></textarea>
                 </Form.Group>
                 <Form.Field onClick={props.edit} control={Button}>Submit</Form.Field>
             </Form>

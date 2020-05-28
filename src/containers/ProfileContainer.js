@@ -18,7 +18,7 @@ class ProfileContainer extends React.Component {
     }
 
     deleteApplication = (id, jId) => {
-        // debugger
+
         fetch(`http://localhost:3000/apps/${id}`, {
             method: "DELETE"
         }).then(resp => resp.json())
@@ -57,26 +57,28 @@ class ProfileContainer extends React.Component {
             this.setState({
                 edit: false
             })
-            // debugger
             window.location.reload()
         })
     }
 
     render(){
         // window.location.reload(false)
+        console.log("profile container props", this.props)
+        // joblisting id = 6, app id = 20
         // debugger
-        console.log(this.props)
         return(
             <div>
-              <Grid columns={2} divided>
+            <div >
+              <Grid className="profile-container" columns={2} divided>
                 <Grid.Row>
                     <Grid.Column>
-                    <div className="profile-info-fixed">
+                    <div className="profile-info-fixed profile">
                         <Profile user={this.props.user} edit={this.editProfileFormButton}/>
                         {this.state.edit ? <EditProfileInformation edit={this.editProfileInfo} name={this.state.name} address={this.state.address} phone={this.state.phoneNumber} email={this.state.email} resume={this.state.resume} onChangeInformation={this.onChangeInformation} /> : null}
                     </div>
                     </Grid.Column>
-                    <div>
+                    <Grid.Column>
+                    <div className="profile">
                         <h1>Applications</h1>
                         {this.props.user.job_listings === undefined ? this.props.applications.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication} currentJobListings={this.props.currentJobListings}/>)
                         : this.props.user.job_listings.map(a => <Application a={a} key={a.id} deleteApplication={this.deleteApplication} currentJobListings={this.props.currentJobListings}/>)}
@@ -86,8 +88,11 @@ class ProfileContainer extends React.Component {
                         {/* {this.props.currentJobListings.map(j => <Application j={j} key={j.id} deleteApplication={this.deleteApplication} companyId={j.company_id}/>)} */}
                         <br />
                     </div>
+                    </Grid.Column>
                 </Grid.Row>
             </Grid>
+            </div>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             </div>
         )
     }

@@ -15,14 +15,14 @@ const Home = (props) => {
                 </div>
                 <div className="column">
                     <div className="ui segment">
-                        <h3> Apply To Jobs </h3>
-                        <img className="card-image" src="https://media.istockphoto.com/vectors/application-form-man-with-clipboard-in-his-hand-fills-in-the-form-of-vector-id1016116752?k=6&m=1016116752&s=612x612&w=0&h=MSnpfy_mxw4eVukvo1wVTObcYS0HQ3t2vLWsZX9s9UA=" />
+                        <h3> Research Companies </h3>
+                         <img className="card-image" src="https://www.electrochem.org/wp-content/uploads/2017/05/RESEARCH.jpg" />
                     </div>
                 </div>
                 <div className="column">
                     <div className="ui segment">
-                        <h3> Research Companies </h3>
-                         <img className="card-image" src="https://www.electrochem.org/wp-content/uploads/2017/05/RESEARCH.jpg" />
+                        <h3> Apply To Jobs </h3>
+                        <img className="card-image" src="https://media.istockphoto.com/vectors/application-form-man-with-clipboard-in-his-hand-fills-in-the-form-of-vector-id1016116752?k=6&m=1016116752&s=612x612&w=0&h=MSnpfy_mxw4eVukvo1wVTObcYS0HQ3t2vLWsZX9s9UA=" />
                     </div>
                 </div>
             </div>

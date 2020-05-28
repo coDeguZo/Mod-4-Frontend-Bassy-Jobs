@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { Button, Form, Segment, Message } from "semantic-ui-react";
+import { Button, Form, Segment, Message, Grid, Header, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom"
 
 
@@ -47,9 +47,12 @@ class CompanyLoginForm extends React.Component {
       return (
         <div>
         {this.state.error === "true" || this.state.error === undefined ?
-        <Segment>
+        <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle' className="company-login">
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as='h2' color='teal' textAlign='center'>
+            <Image src='https://react.semantic-ui.com/logo.png' /> Log-in to your Company Profile
+          </Header>
         <br/>
-        <h1> Company Login Form </h1>
           <Form
             // onSubmit={this.handleLoginSubmit}
             size="mini"
@@ -62,7 +65,7 @@ class CompanyLoginForm extends React.Component {
               error
               header={this.props.failedLogin ? this.props.error : null}
             />
-            <Form.Group widths="equal">
+            <Segment stacked >
               <Form.Input
                 label="email"
                 placeholder="email"
@@ -78,17 +81,15 @@ class CompanyLoginForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.password}
               />
-            </Form.Group>
-            {/* <Link to ={"/employer-profile"}> */}
-              <Button type="submit">Login</Button>
-              {/* <Button type="submit" onClick={null}>Login</Button> */}
-            {/* </Link> */}
+               <Button type="submit">Login</Button>
+            </Segment >
           </Form>
-          <p>Don't have an account? 
-              <Link to="/sign-up-company"> Sign Your Company Up Here</Link>
-          </p>
-          <br /><br /> <br /><br /><br /><br /><br /><br /><br/><br /><br /><br /><br/><br /><br />
-        </Segment>
+          <p style={{color: "white"}}>Don't have an account? </p>
+            <Message>
+            <Link to="/sign-up-company"> Sign Your Company Up Here</Link>
+          </Message>
+        </Grid.Column>
+      </Grid>
         : 
         <div> 
           {/* fake home page. P.S. I'm perfectly happy to remove the below h1 tags at this point. Or we can style this page. */}
@@ -126,4 +127,4 @@ class CompanyLoginForm extends React.Component {
     }
   }
   
-  export default withRouter(CompanyLoginForm);
+export default withRouter(CompanyLoginForm);

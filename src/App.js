@@ -67,6 +67,13 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(d => {
       const filteredApplications = d.filter(data => data.user.id === this.state.user.id)
+
+      // let u = this.state.user
+      // debugger
+      // if(u.apps.length > filteredApplications.length){
+      // filteredApplications.push(u.apps[u.apps.length-1])
+      // }
+
         this.setState({applications: filteredApplications})
       }
     )
@@ -167,7 +174,11 @@ class App extends React.Component {
   addApplication = (data) => {
     // this.setState({user: [...this.state.user.job_listings, data]})
     // debugger
-    this.setState({user: [...this.state.user.apps, data]})
+    let u = this.state.user
+    u.apps.push(data)
+    this.setState({user: u})
+
+    this.setState({applications: [...this.state.applications, data]}) // from backup
   }
 
   // applications: [...this.state.applications, data],
@@ -186,7 +197,6 @@ class App extends React.Component {
       })
     }
     this.setState({applications: filteredApplications})
-    // debugger
     let u = this.state.user
     u.apps = filteredApplications
     // u
@@ -194,7 +204,6 @@ class App extends React.Component {
       return job.id !== jId
     })
     u.job_listings = filteredUserJobListings
-    // debugger
     this.setState({ user: u })
     // window.location.reload()
   }
@@ -335,7 +344,6 @@ class App extends React.Component {
       }).then(resp => resp.json())
       .then(data => {
         this.updateCurrentCompany(data)
-        // debugger
         // this.updateCurrentCompany(data)
       })
   }

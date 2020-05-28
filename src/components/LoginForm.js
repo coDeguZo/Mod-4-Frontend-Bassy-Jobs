@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Segment, Message } from "semantic-ui-react";
+import { Button, Form, Segment, Message, Card, Grid, Header, Image } from "semantic-ui-react";
 import { Link, useHistory, Route, Switch, withRouter } from "react-router-dom"
 import Redir from './Redir'
 
@@ -49,60 +49,47 @@ class LoginForm extends React.Component {
   
     render() {
       return (
-        <div>
+        <div >
           {this.state.error === "true" || this.state.error === undefined ?
-        <Segment>
+          <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle' className="user-login">
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              <Image src='https://react.semantic-ui.com/logo.png' /> Log-in to your User Profile
+            </Header>
           <br/>
-          <h1> User Login Form </h1>
-          <Form
-            size="mini"
-            key="mini"
-            // loading={this.props.authenticatingUser}
-            // error={this.props.failedLogin}
-            onSubmit={this.handleLoginSubmit}
-          >
-            <Message
-              // error
-              // header={this.props.failedLogin ? this.props.error : null}
-            />
-            <Form.Group widths="equal">
-              <Form.Input
-                label="email"
-                placeholder="email"
-                name="email"
-                onChange={this.handleChange}
-                value={this.state.email}
-              />
-              <Form.Input
-                type="password"
-                label="password"
-                placeholder="password"
-                name="password"
-                onChange={this.handleChange}
-                value={this.state.password}
-              />
-            </Form.Group>
-            {/* <Link to="/profile"> */}
-              {/* <Button type="submit" onClick={this.handleLoginSubmit} >Login</Button> */}
-            {/* </Link> */}
-
-            {/* {this.state.error === false ? <Link to="/profile">
-              <Button type="redirect" onClick={this.handleLoginSubmit} >Login</Button>
-            </Link> : 
-            <Link to="/login">
-              <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
-            </Link>} */}
-
-              <Button type="submit">Login</Button>
-            {/* <Link to="/profile"> */}
-              {/* <Button type="submit">Login</Button> */}
-            {/* </Link> */}
-          </Form>
-          <p>Don't have an account? 
-              <Link to="/sign-up"> Sign up here</Link>
-          </p>
-          <br /><br /> <br /><br /><br /><br /><br /><br /><br/><br /><br /><br /><br/>
-        </Segment>
+            {/* <h1> User Login Form </h1> */}
+            <Form
+              size="mini"
+              key="mini"
+              onSubmit={this.handleLoginSubmit}
+            >
+              {/* <Form.Group widths="equal"> */}
+              <Segment stacked>
+                <Form.Input
+                  label="email"
+                  placeholder="email"
+                  name="email"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                />
+                <Form.Input
+                  type="password"
+                  label="password"
+                  placeholder="password"
+                  name="password"
+                  onChange={this.handleChange}
+                  value={this.state.password}
+                />
+              {/* </Form.Group> */}
+                <Button type="submit">Login</Button>
+              </Segment>
+            </Form>
+            <p style={{color: "white"}}>Don't have an account?</p>
+            <Message>
+            <Link to="/sign-up"> Sign up here</Link>
+          </Message>
+        </Grid.Column>
+      </Grid>
         : 
         <div> 
           {/* fake home page. P.S. I'm perfectly happy to remove the below h1 tags at this point. Or we can style this page. */}
@@ -140,126 +127,4 @@ class LoginForm extends React.Component {
     }
   }
   
-  export default withRouter(LoginForm);
-
-
-
-
-
-
-
-
-
-
-// import React from "react";
-// import { Button, Form, Segment, Message } from "semantic-ui-react";
-// import { Link, useHistory, Route, Switch, withRouter } from "react-router-dom"
-// import Redir from './Redir'
-
-
-// class LoginForm extends React.Component {
-//   constructor(){
-//     super()
-//     this.state = {
-//       email: "",
-//       password: "",
-//       error: true
-//     };
-//   }
-  
-//     handleChange = (e, { name, value }) => {
-//       this.setState({ [name]: value });
-//       console.log(this.state)
-//     };
-  
-//     //When form is submitted, make a fetch to "log in the user"
-//     handleLoginSubmit = () => {
-//       console.log("attempting to log in")
-//       // fetch("http://localhost:3000/api/v1/login", {
-//       fetch("http://localhost:3000/login", {
-//         method:"POST",
-//         headers: {
-//           "Content-Type" : "application/json",
-//           "Accept" : "application/json"
-//         },
-//         body: JSON.stringify({
-//           email: this.state.email,
-//           password: this.state.password
-//         })
-//       }).then(res => res.json())
-//       .then(userData => {
-//         console.log("response from the server", userData)
-//         if(userData.error_message){
-//           this.setState({ error: true })
-//           alert(userData.error_message)
-//         }else{
-//           this.setState({ error: false })
-//           this.props.updateCurrentUser(userData)
-//           // alert("Welcome To Bassy Jobs!")
-//         }
-//       })
-//     };
-  
-//     render() {
-//       return (
-//         <div>
-//         <Segment>
-//           <br/>
-//           <h1> User Login Form </h1>
-//           <Form
-//             size="mini"
-//             key="mini"
-//             // loading={this.props.authenticatingUser}
-//             // error={this.props.failedLogin}
-//             onSubmit={this.handleLoginSubmit}
-//           >
-//             <Message
-//               // error
-//               // header={this.props.failedLogin ? this.props.error : null}
-//             />
-//             <Form.Group widths="equal">
-//               <Form.Input
-//                 label="email"
-//                 placeholder="email"
-//                 name="email"
-//                 onChange={this.handleChange}
-//                 value={this.state.email}
-//               />
-//               <Form.Input
-//                 type="password"
-//                 label="password"
-//                 placeholder="password"
-//                 name="password"
-//                 onChange={this.handleChange}
-//                 value={this.state.password}
-//               />
-//             </Form.Group>
-//             {/* <Link to="/profile"> */}
-//               {/* <Button type="submit" onClick={this.handleLoginSubmit} >Login</Button> */}
-//             {/* </Link> */}
-
-//             {/* {this.state.error === false ? <Link to="/profile">
-//               <Button type="redirect" onClick={this.handleLoginSubmit} >Login</Button>
-//             </Link> : 
-//             <Link to="/login">
-//               <Button type="submit" onClick={this.handleLoginSubmit}>Login</Button>
-//             </Link>} */}
-
-//             {this.state.error ? 
-//               <Button type="submit">Login</Button>
-//             : <h1>You have successfully logged in</h1>
-//             }
-//             {/* <Link to="/profile"> */}
-//               {/* <Button type="submit">Login</Button> */}
-//             {/* </Link> */}
-//           </Form>
-//           <p>Don't have an account? 
-//               <Link to="/sign-up"> Sign up here</Link>
-//           </p>
-//         </Segment>
-//         </div>
-//       );
-//     }
-//   }
-  
-//   export default withRouter(LoginForm);
+export default withRouter(LoginForm);

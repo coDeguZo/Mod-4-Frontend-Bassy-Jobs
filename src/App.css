@@ -54,20 +54,20 @@
 .align-right {
   display: flex;
   justify-content: right;
+  padding-left: 50px;
 }
 
 .job-details {
+  height: 100%;
+  margin: 0em;
   position: fixed;
+  /* overflow-y: auto; */
 }
 
 .profile-text-info {
   text-align: left;
   padding-left: 30px;
 }
-
-/* .profile-info-fixed {
-  position: fixed;
-} */
 
 .edit-profile-info-div {
   padding-left: 50px;
@@ -79,16 +79,6 @@
   /* margin:0 auto; */
   align-items: right;
 }
-
-/* .nav-bar {
-  ;
-} */
-
-/* .item {
-  color: red;
-} */
-
-
 
 /* Nav Bar Container Info */
 .topnav {
@@ -232,6 +222,22 @@
   height: 120%;
 }
 
+.user-login {
+  background: url("https://www.harman.com/SiteCollectionImages/Careers/Careers-new.jpg");
+}
+
+.company-login {
+  background: url("https://www.db.com/company/img/16_08_17_DigitalBanking_811x518.jpg")
+}
+
+.company-sign-up {
+  background: url("https://www.dataintensity.com/assets/images/pp-backgrounds/services-professional-services-page-background.jpg")
+}
+
+.user-signup {
+  background: url("https://www.dataintensity.com/assets/images/pp-backgrounds/services-design-page-background.jpg");
+}
+
 .about-text {
   text-align: left;
   padding-left: 50px;
@@ -258,6 +264,23 @@
   margin: 20px;
 }
 
-/* #about-blog {
-
-} */
+.profile-container  {
+  /* position: absolute; */
+  /* z-index: 1;
+  height: 700px;
+  font-size: 16px; */
+  /* overflow: auto; */
+}
+  
+.profile-container .profile{
+  /* position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url("https://cdn.tourcms.com/a/11676/848/1/large.jpg");
+  /* opacity: .35; */
+  /* width: 100%;
+  height: 150%; */
+}

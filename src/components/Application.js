@@ -7,7 +7,7 @@ class Application extends React.Component{
     constructor(){
         super()
         this.state = {
-            appCompanyName: this.fetchCompanyName(),
+            appCompanyName: this.fetchCompanyName,
             id: this.fetchApplicationId()
         }
     }
@@ -41,10 +41,35 @@ class Application extends React.Component{
         fetch('http://localhost:3000/apps')
         .then(resp => resp.json())
         .then(data => {
-            let app = data.find(a => a.job_listing_id === this.props.a.id)
-            // debugger
-            let aId = app.id
-            this.setState({ id: aId})
+            let app
+                // tryCode - Block of code to try
+                app = data.find(a => {
+                    // debugger
+                    return a.job_listing_id === this.props.a.id
+                })
+                // debugger
+                if(app === undefined){
+                //     catchCode - Block of code to handle errors
+                    app = data.find(a => {
+                        // debugger
+                        return a.job_listing_id === this.props.a.job_listing.id
+                    })
+                    let aId = app.id
+                    // debugger
+                    this.setState({ id: aId})
+                }else{
+                    // debugger
+          
+                    let aId = app.id
+                    this.setState({ id: aId})
+                }
+
+            // let app = data.find(a => {
+            //     return a.job_listing_id === this.props.a.id
+                // return a.job_listing_id === this.props.a.job_listing.id
+            // })
+                // debugger
+
         })
     }
 
@@ -55,16 +80,16 @@ class Application extends React.Component{
 
             let company
             // if(this.props.a.company_id === undefined){
+                // debugger
                 company = data.filter(c => c.id === this.props.a.company_id)
-                this.setState({ appCompanyName: company[0].name })
+                return this.setState({ appCompanyName: company[0].name })
             // }else
             //     company = data.filter(c => c.id === this.props.a.company_id)
-            // debugger
         })
     }
 
     render(){
-        // console.log(this.props)
+        console.log("application props", this.props)
         this.props.a.status = "open"   
         return(
         <div className="grey-box">
@@ -79,7 +104,7 @@ class Application extends React.Component{
                     {/* <h3>Status: {this.props.j.status}</h3> */}
                     <h3>Status: {this.props.a.status}</h3>
                     {/* <h3>Company Name: {this.state.appCompanyName}</h3> */}
-                    <h3>Company Name: {this.state.appCompanyName}</h3>
+                    {/* <h3>Company Name: {this.state.appCompanyName}</h3> */}
                     <button onClick={() => this.props.deleteApplication(this.state.id, this.props.a.id)}>Delete your application</button>
                     {/* <button onClick={() => this.props.deleteApplication(this.state.id)}>Delete your application</button> */}
                 </Card.Content>
