@@ -215,6 +215,7 @@
   /* position: absolute; */
   z-index: 1;
   height: 700px;
+  font-size: 16px;
   /* overflow: auto; */
 }
 

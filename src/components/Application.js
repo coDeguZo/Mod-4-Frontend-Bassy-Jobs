@@ -41,7 +41,7 @@ class Application extends React.Component{
         fetch('http://localhost:3000/apps')
         .then(resp => resp.json())
         .then(data => {
-            let app = data.find(a => a.job_listing_id === a.job_listing.id)
+            let app = data.find(a => a.job_listing_id === this.props.a.id)
             // debugger
             let aId = app.id
             this.setState({ id: aId})
@@ -52,8 +52,14 @@ class Application extends React.Component{
         fetch('http://localhost:3000/companies')
         .then(resp => resp.json())
         .then(data => {
-            let company = data.filter(c => c.id === this.props.a.company_id)
-            this.setState({ appCompanyName: company[0].name })
+
+            let company
+            // if(this.props.a.company_id === undefined){
+                company = data.filter(c => c.id === this.props.a.company_id)
+                this.setState({ appCompanyName: company[0].name })
+            // }else
+            //     company = data.filter(c => c.id === this.props.a.company_id)
+            // debugger
         })
     }
 
@@ -74,8 +80,8 @@ class Application extends React.Component{
                     <h3>Status: {this.props.a.status}</h3>
                     {/* <h3>Company Name: {this.state.appCompanyName}</h3> */}
                     <h3>Company Name: {this.state.appCompanyName}</h3>
-                    {/* <button onClick={() => this.props.deleteApplication(this.props.a.id)}>Delete your application</button> */}
-                    <button onClick={() => this.props.deleteApplication(this.state.id)}>Delete your application</button>
+                    <button onClick={() => this.props.deleteApplication(this.state.id, this.props.a.id)}>Delete your application</button>
+                    {/* <button onClick={() => this.props.deleteApplication(this.state.id)}>Delete your application</button> */}
                 </Card.Content>
             </Card>
         </Card.Group>

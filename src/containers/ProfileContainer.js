@@ -17,12 +17,13 @@ class ProfileContainer extends React.Component {
         }
     }
 
-    deleteApplication = (id) => {
+    deleteApplication = (id, jId) => {
+        // debugger
         fetch(`http://localhost:3000/apps/${id}`, {
             method: "DELETE"
         }).then(resp => resp.json())
         .then(data => {
-            this.props.deleteAppFromState(data.id)
+            this.props.deleteAppFromState(data.id, jId)
         })
     }
 

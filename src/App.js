@@ -166,13 +166,14 @@ class App extends React.Component {
 
   addApplication = (data) => {
     // this.setState({user: [...this.state.user.job_listings, data]})
-    debugger
+    // debugger
     this.setState({user: [...this.state.user.apps, data]})
   }
 
   // applications: [...this.state.applications, data],
 
-  deleteAppFromState = (id) => {
+  deleteAppFromState = (id, jId) => {
+    const s = this.state
     let filteredApplications
     if(this.state.applications.length > 0){
       filteredApplications = this.state.applications.filter(app => {
@@ -180,13 +181,21 @@ class App extends React.Component {
       })
     } 
     if(this.state.user.apps.length > 0){
-        filteredApplications = this.state.user.apps.filter(app => {
+      filteredApplications = this.state.user.apps.filter(app => {
         return app.id !== id 
       })
     }
     this.setState({applications: filteredApplications})
     // debugger
-    this.setState({ user: this.state.user, apps: [filteredApplications] } )
+    let u = this.state.user
+    u.apps = filteredApplications
+    // u
+    let filteredUserJobListings = this.state.user.job_listings.filter(job => {
+      return job.id !== jId
+    })
+    u.job_listings = filteredUserJobListings
+    // debugger
+    this.setState({ user: u })
     // window.location.reload()
   }
 
